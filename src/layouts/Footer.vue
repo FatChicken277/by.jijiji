@@ -3,7 +3,7 @@ import TimeCounter from "../components/TimeCounter.vue";
 </script>
 
 <template>
-  <div class="mt-auto flex justify-between p-5">
+  <div class="absolute bottom-0 mt-auto flex w-full justify-between p-5">
     <h1 class="text-lg md:text-xl xl:text-[3rem]">
       PLAY <font-awesome-icon icon="fa-solid fa-play" />
     </h1>

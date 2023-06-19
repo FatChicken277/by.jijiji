@@ -10,23 +10,25 @@ function openMenu() {
 
 <template>
   <header
-    class="z-10 flex flex-wrap items-center justify-between p-5 font-mono font-black md:flex-nowrap"
+    class="absolute top-0 z-20 flex w-full flex-wrap items-center justify-between p-5 font-mono font-black md:flex-nowrap"
   >
     <!-- Desktop -->
-    <span class="hidden md:block md:text-lg xl:text-2xl"
-      >PROPERTY OF CREATIVE CONTROL BY.HASKI©️</span
-    >
+    <router-link
+      to="/"
+      class="hidden md:mr-auto md:block md:text-lg xl:text-2xl"
+      >PROPERTY OF CREATIVE CONTROL BY.HASKI©️
+    </router-link>
 
     <nav class="hidden md:block">
       <ul class="flex text-lg">
-        <li class="p-4"><a href="#">PROJECTS</a></li>
-        <li class="p-4"><a href="#">ABOUT ME</a></li>
-        <li class="p-4"><a href="#">CONTACT</a></li>
+        <li class="p-4"><router-link to="/projects">PROJECTS</router-link></li>
+        <li class="p-4"><router-link to="/projects">ABOUT ME</router-link></li>
+        <li class="p-4"><router-link to="/projects">CONTACT</router-link></li>
       </ul>
     </nav>
 
     <!-- mobile -->
-    <span class="text-xl md:hidden">BY.HASKI©️</span>
+    <router-link to="/" class="text-xl md:hidden">BY.HASKI©️</router-link>
 
     <font-awesome-icon
       @click="openMenu"
@@ -39,9 +41,9 @@ function openMenu() {
       class="my-10 flex basis-full justify-center bg-black md:hidden"
     >
       <ul class="flex flex-col items-center">
-        <li class="p-4"><a href="#">PROJECTS</a></li>
-        <li class="p-4"><a href="#">ABOUT ME</a></li>
-        <li class="p-4"><a href="#">CONTACT</a></li>
+        <li class="p-4"><router-link to="/projects">PROJECTS</router-link></li>
+        <li class="p-4"><router-link to="/projects">ABOUT ME</router-link></li>
+        <li class="p-4"><router-link to="/projects">CONTACT</router-link></li>
       </ul>
     </nav>
   </header>

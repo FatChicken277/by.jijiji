@@ -5,6 +5,8 @@ import Header from "../layouts/Header.vue";
 import Home from "../views/Home.vue";
 import Footer from "../layouts/Footer.vue";
 
+import Projects from "../views/Projects.vue";
+
 // Routes
 const routes = [
   {
@@ -13,6 +15,15 @@ const routes = [
     components: {
       header: Header,
       default: Home,
+      footer: Footer,
+    },
+  },
+  {
+    path: "/projects",
+    name: "projects",
+    components: {
+      header: Header,
+      default: Projects,
       footer: Footer,
     },
   },

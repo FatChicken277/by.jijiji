@@ -1,8 +1,8 @@
 <script setup>
-import { watchEffect } from "vue";
+import { watchEffect, ref } from "vue";
 import tailwindConfig from "../../tailwind.config.js";
 
-let body = document.body;
+let image = ref("");
 
 let backgrounds = {
   1: "https://i0.wp.com/mattsmusicmine.com/wp-content/uploads/2020/06/kanye_west_wash_us_in_the_blood_01.gif?resize=533%2C300&ssl=1",
@@ -21,7 +21,7 @@ let backgrounds = {
 };
 
 function changeBg(index) {
-  body.style.backgroundImage = "url('" + backgrounds[index] + "')";
+  image.value = "url('" + backgrounds[index] + "')";
 }
 
 let intervalId = 0;
@@ -38,8 +38,12 @@ function startInterval() {
 
   intervalId = setInterval(() => {
     activeIndex = (activeIndex + 1) % (Object.keys(backgrounds).length + 1);
+
+    if (activeIndex == 0) {
+      activeIndex = 1;
+    }
+
     changeBg(activeIndex);
-    console.log("hi");
   }, 5000);
 }
 
@@ -64,23 +68,33 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div id="logo" class="absolute h-full w-full"></div>
-  <!-- Desktop -->
-  <div class="hidden md:z-10 md:grid md:h-full md:grid-flow-col md:py-10">
+  <div id="home" :style="{ 'background-image': image }" class="h-[100vh]">
+    <div id="logo" class="absolute h-full w-full"></div>
+    <!-- Desktop -->
     <div
-      v-for="index in 13"
-      :key="index"
-      @mouseover="changeBg(index)"
-      class="group flex justify-center"
+      class="relative hidden md:z-10 md:grid md:h-full md:grid-flow-col md:py-20"
     >
-      <h1 class="mt-auto hidden text-[9rem] group-hover:block">
-        {{ index }}
-      </h1>
+      <div
+        v-for="index in 13"
+        :key="index"
+        @mouseover="changeBg(index)"
+        class="group flex justify-center"
+      >
+        <h1 class="mt-auto hidden text-[6rem] group-hover:block">
+          {{ index }}
+        </h1>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+#home {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 #logo {
   background-image: url("https://byhaski.com/img/logo.d20b1b89.png");
   background-position: center center;
