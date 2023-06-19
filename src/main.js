@@ -12,12 +12,12 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* import specific icons */
-import {} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faPlay } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import {} from "@fortawesome/free-brands-svg-icons";
 
 /* add icons to the library */
-library.add();
+library.add(faBars, faPlay);
 
 // Create and mount the root instance.
 const app = createApp(App);
