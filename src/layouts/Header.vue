@@ -1,6 +1,16 @@
 <script setup>
 import { ref } from "vue";
 
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+// computed
+const currentRoute = computed(() => {
+  return router.currentRoute.value.name;
+});
+
 let isMenuOpen = ref(false);
 
 function openMenu() {
@@ -21,9 +31,10 @@ function openMenu() {
 
     <nav class="hidden md:block">
       <ul class="flex text-lg">
+        <li class="p-4"><router-link to="/">HOME</router-link></li>
         <li class="p-4"><router-link to="/projects">PROJECTS</router-link></li>
-        <li class="p-4"><router-link to="/projects">ABOUT ME</router-link></li>
-        <li class="p-4"><router-link to="/projects">CONTACT</router-link></li>
+        <li class="p-4"><router-link to="/about">ABOUT ME</router-link></li>
+        <li class="p-4"><router-link to="/contact">CONTACT</router-link></li>
       </ul>
     </nav>
 
@@ -41,9 +52,18 @@ function openMenu() {
       class="my-10 flex basis-full justify-center bg-black md:hidden"
     >
       <ul class="flex flex-col items-center">
-        <li class="p-4"><router-link to="/projects">PROJECTS</router-link></li>
-        <li class="p-4"><router-link to="/projects">ABOUT ME</router-link></li>
-        <li class="p-4"><router-link to="/projects">CONTACT</router-link></li>
+        <li class="p-4">
+          <router-link @click="openMenu" to="/">HOME</router-link>
+        </li>
+        <li class="p-4">
+          <router-link @click="openMenu" to="/projects">PROJECTS</router-link>
+        </li>
+        <li class="p-4">
+          <router-link @click="openMenu" to="/about">ABOUT ME</router-link>
+        </li>
+        <li class="p-4">
+          <router-link @click="openMenu" to="/contact">CONTACT</router-link>
+        </li>
       </ul>
     </nav>
   </header>

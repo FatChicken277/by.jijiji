@@ -90,6 +90,7 @@ watchEffect(() => {
 
 <style scoped>
 #home {
+  background-image: url("https://i0.wp.com/mattsmusicmine.com/wp-content/uploads/2020/06/kanye_west_wash_us_in_the_blood_01.gif?resize=533%2C300&ssl=1");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

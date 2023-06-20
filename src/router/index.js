@@ -27,6 +27,14 @@ const routes = [
       footer: Footer,
     },
   },
+  {
+    path: "/about",
+    name: "about",
+  },
+  {
+    path: "/contact",
+    name: "contact",
+  },
 ];
 
 // Router

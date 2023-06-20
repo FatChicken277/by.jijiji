@@ -1,13 +1,333 @@
-<script setup></script>
+<script setup>
+let cards = [
+  {
+    title: "Itagüi - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/-jO69omrKnY/maxresdefault.jpg",
+    yt: "-jO69omrKnY",
+  },
+  {
+    title: "No Marketing - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/1m1DmcMOkv4/maxresdefault.jpg",
+    yt: "1m1DmcMOkv4",
+  },
+  {
+    title: "Piso con Flores REMIX - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/fHxEPvelWKI/maxresdefault.jpg",
+    yt: "fHxEPvelWKI",
+  },
+  {
+    title: "Viernes XIII - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/vxgaQSXXROY/maxresdefault.jpg",
+    yt: "vxgaQSXXROY",
+  },
+  {
+    title: "Wow - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/r4TyOt9Nk5Y/maxresdefault.jpg",
+    yt: "r4TyOt9Nk5Y",
+  },
+  {
+    title: "Lit - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/zFmj8vMyEE0/maxresdefault.jpg",
+    yt: "zFmj8vMyEE0",
+  },
+  {
+    title: "Aquella Noche - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/IRQ71rHqADQ/maxresdefault.jpg",
+    yt: "IRQ71rHqADQ",
+  },
+  {
+    title: "No se siente bien - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/kGwIpduda6Y/maxresdefault.jpg",
+    yt: "kGwIpduda6Y",
+  },
+  {
+    title: "Sadboy - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/NiquNUx9zXw/maxresdefault.jpg",
+    yt: "NiquNUx9zXw",
+  },
+  {
+    title: "Gatubella - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/2jOStSXiSeQ/maxresdefault.jpg",
+    yt: "2jOStSXiSeQ",
+  },
+  {
+    title: "A Cámara Lenta - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/GEAFVMHQxdE/maxresdefault.jpg",
+    yt: "GEAFVMHQxdE",
+  },
+  {
+    title: "06 - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/9mtV_Ir0nsE/maxresdefault.jpg",
+    yt: "9mtV_Ir0nsE",
+  },
+  {
+    title: "Medallo Shit - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/Kqz0aSLAO3E/maxresdefault.jpg",
+    yt: "Kqz0aSLAO3E",
+  },
+  {
+    title: "La Ubi - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/NaPS7phSKp4/maxresdefault.jpg",
+    yt: "NaPS7phSKp4",
+  },
+  {
+    title: "Blackjack - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/Pw78Gea1FW0/maxresdefault.jpg",
+    yt: "Pw78Gea1FW0",
+  },
+  {
+    title: "Números - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/vaoYH19sKW4/maxresdefault.jpg",
+    yt: "vaoYH19sKW4",
+  },
+  {
+    title: "Todavía me piensas - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/u9Z7CZ4FCgs/maxresdefault.jpg",
+    yt: "u9Z7CZ4FCgs",
+  },
+  {
+    title: "Estilo y Pepas - Music Video",
+    work: "Dirección, Edición",
+    src: "https://i.imgur.com/mEXry0q.png",
+    yt: "2Ws3N5soMms",
+  },
+  {
+    title: "No Pregunten - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/w7dDHpcVUsA/maxresdefault.jpg",
+    yt: "w7dDHpcVUsA",
+  },
+  {
+    title: "Under Club - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/xOfgniX20fo/maxresdefault.jpg",
+    yt: "xOfgniX20fo",
+  },
+  {
+    title: "Traición - Music Video",
+    work: "Edición",
+    src: "https://i.imgur.com/v5STOI5.png",
+    yt: "1NXR9e7aolo",
+  },
+  {
+    title: "Decidete - Music Video",
+    work: "Edición",
+    src: "https://i.imgur.com/yZuIPjW.png",
+    yt: "ErER5PN1KAs",
+  },
+  {
+    title: "La Luna - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/a0yI4N8Qo3Y/maxresdefault.jpg",
+    yt: "a0yI4N8Qo3Y",
+  },
+  {
+    title: "Sin Paranoias - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/a56eM-cVwNU/maxresdefault.jpg",
+    yt: "a56eM-cVwNU",
+  },
+  {
+    title: "Valdiri - Music Video",
+    work: "Dirección, Edición",
+    src: "https://i.imgur.com/IeofniX.png",
+    yt: "atmEodOLH8s",
+  },
+  {
+    title: "Gangoso World - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/svycs9c2KIc/maxresdefault.jpg",
+    yt: "svycs9c2KIc",
+  },
+  {
+    title: "No queda nada - Music Video",
+    work: "Dirección, Edición",
+    src: "https://i.imgur.com/EWxuuQ0.png",
+    yt: "1f5Wh_4ST5Q",
+  },
+  {
+    title: "Artistaje - Music Video",
+    work: "Dirección, Edición",
+    src: "https://i.imgur.com/XCy7ynq.png",
+    yt: "NB1IoMTUlpY",
+  },
+  {
+    title: "Kien soy, K kiero - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/qM-Ir7wqGcs/maxresdefault.jpg",
+    yt: "qM-Ir7wqGcs",
+  },
+  {
+    title: "De la noche a la mañana - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/5gMzT2bn_bU/maxresdefault.jpg",
+    yt: "5gMzT2bn_bU",
+  },
+  {
+    title: "Los Amantes - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/UjPp-pFLP-w/maxresdefault.jpg",
+    yt: "UjPp-pFLP-w",
+  },
+  {
+    title: "11/11 - Music Video",
+    work: "Oneshot",
+    src: "https://img.youtube.com/vi/HiFv_YvlcaE/maxresdefault.jpg",
+    yt: "HiFv_YvlcaE",
+  },
+  {
+    title: "Chacales - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/iUvRnu6ucDA/maxresdefault.jpg",
+    yt: "iUvRnu6ucDA",
+  },
+  {
+    title: "Puesto Pa Mí - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/rWrQVtEKmwY/maxresdefault.jpg",
+    yt: "rWrQVtEKmwY",
+  },
+  {
+    title: "KIDD - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/NfAXHE4PDNw/maxresdefault.jpg",
+    yt: "NfAXHE4PDNw",
+  },
+  {
+    title: "Piso con Flores - Music Video",
+    work: "Dirección, Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/32c2fb136980925.62033afbd9829.png",
+    yt: "2CYqMpFEPyk",
+  },
+  {
+    title: "Honey, mátame - Music Video",
+    work: "Dirección, Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/01e2de136979625.620332c967d29.jpg",
+    yt: "pQJR9E3a8J8",
+  },
+  {
+    title: "No kiero otro love - Music Video",
+    work: "Dirección, Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/12c302136976721.620320de2f277.png",
+    yt: "QJiaddtTMvo",
+  },
+  {
+    title: "DIME - Music Video",
+    work: "Dirección, Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/daeb4f136975405.620318caed501.png",
+    yt: "bI4mdQO7O98",
+  },
+  {
+    title: "AQQE - Music Video",
+    work: "Dirección, Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/83188f136974385.6203123b4c2cb.png",
+    yt: "gy_LIIS7aVc",
+  },
+  {
+    title: "Call Me Future - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/5WffW-e_iHs/maxresdefault.jpg",
+    yt: "5WffW-e_iHs",
+  },
+  {
+    title: "AutentiK - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/XRGNCF41Wb0/maxresdefault.jpg",
+    yt: "XRGNCF41Wb0",
+  },
+  {
+    title: "Esperan por ti - Music Video",
+    work: "Oneshot",
+    src: "https://img.youtube.com/vi/yduDm4FXFrk/maxresdefault.jpg",
+    yt: "yduDm4FXFrk",
+  },
+  {
+    title: "Merchopercho - GTA Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/IX9vbw-sFsE/maxresdefault.jpg",
+    yt: "IX9vbw-sFsE",
+  },
+  {
+    title: "Sin Pagar El Vuelo - Music Video",
+    work: "Dirección, Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/baad2d136974913.62031b9c98915.png",
+    yt: "HelyULdXDyE",
+  },
+  {
+    title: "Cero Estrés - Music Video",
+    work: "Dirección, Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/c691d5136106535.61f33d3e49093.png",
+    yt: "fUB-Ad4P9N8",
+  },
+  {
+    title: "Her Way - Edit Video Music",
+    work: "Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/957dbe136379529.61f8c227ee342.png",
+    yt: "Ngd6fCuHHnU",
+  },
+  {
+    title: "Cero Ocho - Music Video",
+    work: "Dirección, Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/efdd5e136379011.61f8bedf79384.png",
+    yt: "0bNNoNKO7GY",
+  },
+  {
+    title: "No te vayas - Music Video",
+    work: "Dirección, Edición",
+    src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/a46806136039491.61f24d54a5820.png",
+    yt: "FHj_6k5CLj4",
+  },
+  {
+    title: "See you never - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/LtfDA649SJk/maxresdefault.jpg",
+    yt: "LtfDA649SJk",
+  },
+  {
+    title: "Tan Lejos - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/DELbaZMabaE/maxresdefault.jpg",
+    yt: "DELbaZMabaE",
+  },
+];
+</script>
 
 <template>
-  <div class="grid grid-cols-3 bg-red-400">
+  <div class="grid grid-cols-1 gap-3 px-5 pt-28 md:grid-cols-2 xl:grid-cols-3">
     <div
-      v-for="index in 10"
-      :key="index"
-      class="flex h-[20rem] items-center justify-center"
+      v-for="card in cards"
+      :key="card.title"
+      class="group relative my-2 flex aspect-video w-full flex-col md:my-0 md:items-center md:justify-center"
     >
-      {{ index }}
+      <img
+        class="aspect-video object-cover transition ease-in-out md:group-hover:opacity-50 md:group-hover:blur-md"
+        :src="card.src"
+      />
+      <div
+        class="flex flex-col break-words group-hover:flex md:absolute md:hidden md:items-center md:text-center"
+      >
+        <h1 class="mt-2 box-content break-words text-xl font-bold md:mt-0">
+          {{ card.title.toUpperCase() }}
+        </h1>
+        <h2 class="text-xs">{{ card.work.toUpperCase() }}</h2>
+      </div>
     </div>
   </div>
 </template>

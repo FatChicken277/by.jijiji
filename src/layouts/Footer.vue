@@ -4,10 +4,10 @@ import TimeCounter from "../components/TimeCounter.vue";
 
 <template>
   <div class="absolute bottom-0 mt-auto flex w-full justify-between p-5">
-    <h1 class="text-lg md:text-xl xl:text-[3rem]">
+    <h1 class="text-xl xl:text-[3rem]">
       PLAY <font-awesome-icon icon="fa-solid fa-play" />
     </h1>
-    <TimeCounter class="text-lg md:text-xl xl:text-[3rem]" />
+    <TimeCounter class="text-xl xl:text-[3rem]" />
   </div>
 </template>
 
