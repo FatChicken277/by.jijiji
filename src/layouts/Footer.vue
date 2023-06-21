@@ -11,7 +11,9 @@ const currentYear = date.getFullYear();
         >@aleejo.rc</a
       ></span
     >
-    <h2>©️ Copyright by ByHaski. {{ currentYear }}. All Rights Reserved.</h2>
+    <h2 class="text-center">
+      ©️ Copyright by ByHaski. {{ currentYear }}. All Rights Reserved.
+    </h2>
   </div>
 </template>
 
