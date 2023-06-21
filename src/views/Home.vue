@@ -68,7 +68,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div id="home" :style="{ 'background-image': image }" class="h-[100vh]">
+  <div id="home" :style="{ 'background-image': image }" class="h-[100dvh]">
     <div id="logo" class="absolute h-full w-full"></div>
     <!-- Desktop -->
     <div
@@ -80,7 +80,9 @@ watchEffect(() => {
         @mouseover="changeBg(index)"
         class="group flex justify-center"
       >
-        <h1 class="mt-auto hidden text-[6rem] group-hover:block">
+        <h1
+          class="mt-auto hidden group-hover:block md:text-[5rem] xl:text-[7rem]"
+        >
           {{ index }}
         </h1>
       </div>

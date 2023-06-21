@@ -1,16 +1,12 @@
 <script setup>
+import { ref, onMounted } from "vue";
+
 let cards = [
   {
     title: "Itagüi - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/-jO69omrKnY/maxresdefault.jpg",
     yt: "-jO69omrKnY",
-  },
-  {
-    title: "No Marketing - Music Video",
-    work: "Edición",
-    src: "https://img.youtube.com/vi/1m1DmcMOkv4/maxresdefault.jpg",
-    yt: "1m1DmcMOkv4",
   },
   {
     title: "Piso con Flores REMIX - Music Video",
@@ -23,12 +19,6 @@ let cards = [
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/vxgaQSXXROY/maxresdefault.jpg",
     yt: "vxgaQSXXROY",
-  },
-  {
-    title: "Wow - Music Video",
-    work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/r4TyOt9Nk5Y/maxresdefault.jpg",
-    yt: "r4TyOt9Nk5Y",
   },
   {
     title: "Lit - Music Video",
@@ -53,18 +43,6 @@ let cards = [
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/NiquNUx9zXw/maxresdefault.jpg",
     yt: "NiquNUx9zXw",
-  },
-  {
-    title: "Gatubella - Music Video",
-    work: "Edición",
-    src: "https://img.youtube.com/vi/2jOStSXiSeQ/maxresdefault.jpg",
-    yt: "2jOStSXiSeQ",
-  },
-  {
-    title: "A Cámara Lenta - Music Video",
-    work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/GEAFVMHQxdE/maxresdefault.jpg",
-    yt: "GEAFVMHQxdE",
   },
   {
     title: "06 - Music Video",
@@ -217,12 +195,6 @@ let cards = [
     yt: "2CYqMpFEPyk",
   },
   {
-    title: "Honey, mátame - Music Video",
-    work: "Dirección, Edición",
-    src: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/01e2de136979625.620332c967d29.jpg",
-    yt: "pQJR9E3a8J8",
-  },
-  {
     title: "No kiero otro love - Music Video",
     work: "Dirección, Edición",
     src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/12c302136976721.620320de2f277.png",
@@ -295,38 +267,95 @@ let cards = [
     yt: "FHj_6k5CLj4",
   },
   {
-    title: "See you never - Music Video",
-    work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/LtfDA649SJk/maxresdefault.jpg",
-    yt: "LtfDA649SJk",
-  },
-  {
     title: "Tan Lejos - Music Video",
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/DELbaZMabaE/maxresdefault.jpg",
     yt: "DELbaZMabaE",
   },
 ];
+
+let displayCards = ref([]);
+let popupIsActive = ref(false);
+let popupUrl = ref("");
+let from = 0;
+
+function openVideo(code) {
+  popupIsActive.value = !popupIsActive.value;
+  popupUrl.value = "https://www.youtube.com/embed/" + code;
+}
+
+function getCards(initial) {
+  from += 10;
+  return cards.slice(initial, from);
+}
+
+function handleScroll() {
+  if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 50) {
+    displayCards.value = [...displayCards.value, ...getCards(from)];
+  }
+}
+
+onMounted(() => {
+  displayCards.value = getCards(from);
+  window.addEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-3 px-5 pt-28 md:grid-cols-2 xl:grid-cols-3">
+  <div>
     <div
-      v-for="card in cards"
-      :key="card.title"
-      class="group relative my-2 flex aspect-video w-full flex-col md:my-0 md:items-center md:justify-center"
+      v-if="popupIsActive"
+      @wheel.prevent
+      @touchmove.prevent
+      @scroll.prevent
+      class="absolute z-50 flex h-full w-full flex-col items-center"
     >
-      <img
-        class="aspect-video object-cover transition ease-in-out md:group-hover:opacity-50 md:group-hover:blur-md"
-        :src="card.src"
-      />
+      <div class="absolute h-full w-full bg-zinc-900 opacity-90"></div>
       <div
-        class="flex flex-col break-words group-hover:flex md:absolute md:hidden md:items-center md:text-center"
+        class="sticky top-0 z-10 flex h-[100vh] flex-col items-center justify-center"
       >
-        <h1 class="mt-2 box-content break-words text-xl font-bold md:mt-0">
-          {{ card.title.toUpperCase() }}
-        </h1>
-        <h2 class="text-xs">{{ card.work.toUpperCase() }}</h2>
+        <button
+          @click="openVideo()"
+          class="mb-4 h-14 w-14 rounded-full bg-black text-2xl"
+        >
+          <font-awesome-icon icon="fa-solid fa-xmark" />
+        </button>
+        <div
+          class="aspect-video w-[90dvw] shadow-[0_0px_30px_rgba(0,0,0,0.5)] md:h-[60dvh] md:w-full"
+        >
+          <iframe
+            width="100%"
+            height="100%"
+            :src="popupUrl"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-1 gap-3 px-5 pt-28 md:grid-cols-2 xl:grid-cols-3"
+    >
+      <div
+        v-for="card in displayCards"
+        :key="card.title"
+        @click="openVideo(card.yt)"
+        class="group relative my-2 flex aspect-video w-full cursor-pointer flex-col md:my-0 md:items-center md:justify-center"
+      >
+        <img
+          class="aspect-video object-cover transition ease-in-out md:group-hover:opacity-10 md:group-hover:blur-sm"
+          :src="card.src"
+        />
+        <div
+          class="flex flex-col break-words group-hover:flex md:absolute md:hidden md:items-center md:text-center"
+        >
+          <h1 class="mt-2 box-content break-words text-xl font-bold md:mt-0">
+            {{ card.title.toUpperCase() }}
+          </h1>
+          <h2 class="text-xs">{{ card.work.toUpperCase() }}</h2>
+        </div>
       </div>
     </div>
   </div>

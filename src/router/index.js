@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Header from "../layouts/Header.vue";
 import Home from "../views/Home.vue";
 import Footer from "../layouts/Footer.vue";
+import VideoFooter from "../layouts/VideoFooter.vue";
 
 import Projects from "../views/Projects.vue";
 
@@ -15,7 +16,7 @@ const routes = [
     components: {
       header: Header,
       default: Home,
-      footer: Footer,
+      footer: VideoFooter,
     },
   },
   {

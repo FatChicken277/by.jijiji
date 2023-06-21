@@ -13,11 +13,6 @@
 </template>
 
 <style scoped>
-@font-face {
-  font-family: "Monument Extended Bold";
-  src: url("./fonts/monumentextended-bold.woff2");
-}
-
 .page-opacity-enter-active,
 .page-opacity-leave-active {
   transition: 200ms ease all;
@@ -45,7 +40,7 @@
   50%,
   70% {
     transform: translate(-0.2px, -0.3px);
-    opacity: 91%;
+    opacity: 97%;
   }
 
   40%,
@@ -56,6 +51,7 @@
 }
 
 .app {
+  filter: blur(0.7px);
   animation: vhs-effect 1s infinite;
 }
 </style>

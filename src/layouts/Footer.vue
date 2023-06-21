@@ -1,13 +1,17 @@
 <script setup>
-import TimeCounter from "../components/TimeCounter.vue";
+const date = new Date();
+const currentYear = date.getFullYear();
 </script>
 
 <template>
-  <div class="absolute bottom-0 mt-auto flex w-full justify-between p-5">
-    <h1 class="text-xl xl:text-[3rem]">
-      PLAY <font-awesome-icon icon="fa-solid fa-play" />
-    </h1>
-    <TimeCounter class="text-xl xl:text-[3rem]" />
+  <div class="mt-10 flex w-full flex-col items-center justify-center p-10">
+    <span
+      >Website created by
+      <a class="underline" href="https://www.instagram.com/aleejo.rc/"
+        >@aleejo.rc</a
+      ></span
+    >
+    <h2>©️ Copyright by ByHaski. {{ currentYear }}. All Rights Reserved.</h2>
   </div>
 </template>
 
