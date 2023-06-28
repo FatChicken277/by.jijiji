@@ -2,11 +2,29 @@
 import { ref, onMounted } from "vue";
 
 let cards = [
+   {
+    title: "Finco - Music Video",
+    work: "Edición",
+    src: "https://i.imgur.com/lEICVEO.png",
+    yt: "ZueYvOuX510E",
+  },
+  {
+    title: "Palabreo - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/UpE7eAjN8XE/maxresdefault.jpg",
+    yt: "UpE7eAjN8XE",
+  },
+  {
+    title: "Por Mí - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/VRDNh-FF9B4/maxresdefault.jpg",
+    yt: "VRDNh-FF9B4",
+  },
   {
     title: "Déjà vu - Music Video",
     work: "Edición",
     src: "https://i.imgur.com/k7nhORv.jpg",
-    yt: "-jO69omrKnY",
+    yt: "WIkZlUOg9o4",
   },
   {
     title: "Itagüi - Music Video",
