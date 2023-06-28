@@ -20,16 +20,21 @@ let backgrounds = {
   13: "videos/Video13.mp4",
 };
 
-function loadVideo(src) {
+async function loadVideo(src) {
+  const response = await fetch(src);
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
+
   let v = document.createElement("video");
   v.style.display = "none";
   v.preload = "auto";
-  v.src = src;
+  v.src = url;
+
   document.body.appendChild(v);
 
-  return new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
     v.addEventListener("loadeddata", () => {
-      resolve();
+      resolve(url);
     });
 
     v.addEventListener("error", () => {
@@ -44,21 +49,24 @@ function preloadVideos() {
   return Promise.all(videoPromises);
 }
 
+const blobUrls = ref([]);
+
 onMounted(async () => {
   try {
-    await preloadVideos();
-    // All videos have been fully loaded
+    blobUrls.value = await preloadVideos();
+    // All videos have been fully loaded and cached as Blob URLs
+    // You can store the blobUrls for later use, if needed
   } catch (error) {
     // An error occurred while loading the videos
   }
 });
 
 function changeBg(index) {
-  video.value = backgrounds[index];
+  video.value = blobUrls.value[index];
 }
 
 let intervalId = 0;
-let activeIndex = 1;
+let activeIndex = 0;
 
 function stopInterval() {
   clearInterval(intervalId);
@@ -70,11 +78,7 @@ function startInterval() {
   changeBg(activeIndex);
 
   intervalId = setInterval(() => {
-    activeIndex = (activeIndex + 1) % (Object.keys(backgrounds).length + 1);
-
-    if (activeIndex == 0) {
-      activeIndex = 1;
-    }
+    activeIndex = (activeIndex + 1) % Object.keys(backgrounds).length;
 
     changeBg(activeIndex);
   }, 5000);
@@ -120,7 +124,7 @@ watchEffect(() => {
       class="relative hidden md:z-10 md:grid md:h-full md:grid-flow-col md:py-20"
     >
       <div
-        v-for="index in 13"
+        v-for="(value, index) in 13"
         :key="index"
         @mouseover="changeBg(index)"
         class="group flex justify-center"
@@ -128,7 +132,7 @@ watchEffect(() => {
         <h1
           class="mt-auto hidden group-hover:block md:text-[5rem] xl:text-[7rem]"
         >
-          {{ index }}
+          {{ value }}
         </h1>
       </div>
     </div>
