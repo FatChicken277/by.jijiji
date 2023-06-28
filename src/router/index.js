@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // Components
-import Header from "../layouts/Header.vue";
-import Home from "../views/Home.vue";
-import Footer from "../layouts/Footer.vue";
-import VideoFooter from "../layouts/VideoFooter.vue";
+const Header = () => import("../layouts/Header.vue");
+const Home = () => import("../views/Home.vue");
+const Footer = () => import("../layouts/Footer.vue");
+const VideoFooter = () => import("../layouts/VideoFooter.vue");
 
-import Projects from "../views/Projects.vue";
+const Projects = () => import("../views/Projects.vue");
+const About = () => import("../views/About.vue");
+const Contact = () => import("../views/Contact.vue");
 
 // Routes
 const routes = [
@@ -31,10 +33,18 @@ const routes = [
   {
     path: "/about",
     name: "about",
+    components: {
+      header: Header,
+      default: About,
+    },
   },
   {
     path: "/contact",
     name: "contact",
+    components: {
+      header: Header,
+      default: Contact,
+    },
   },
 ];
 

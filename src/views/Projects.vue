@@ -335,9 +335,7 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div
-      class="grid grid-cols-1 gap-3 px-5 pt-28 md:grid-cols-2 xl:grid-cols-3"
-    >
+    <div class="grid grid-cols-1 gap-3 px-5 md:grid-cols-2 xl:grid-cols-3">
       <div
         v-for="card in displayCards"
         :key="card.title"
@@ -346,6 +344,7 @@ onMounted(() => {
       >
         <img
           class="aspect-video object-cover transition ease-in-out md:group-hover:opacity-10 md:group-hover:blur-sm"
+          :alt="card.title"
           :src="card.src"
         />
         <div

@@ -25,7 +25,8 @@ function openMenu() {
 
 <template>
   <header
-    class="absolute top-0 z-20 flex w-full flex-wrap items-center justify-between p-5 font-black md:flex-nowrap"
+    :class="{ absolute: currentRoute === 'home' }"
+    class="flex w-full flex-wrap items-center justify-between p-5 font-black md:flex-nowrap"
   >
     <!-- Desktop -->
     <router-link to="/" class="hidden md:block md:text-lg xl:text-2xl"
@@ -44,13 +45,13 @@ function openMenu() {
       </ul>
 
       <div class="ml-5 space-x-5 px-5">
-        <a :href="igLink">
+        <a :href="igLink" aria-label="instagram">
           <font-awesome-icon icon="fa-brands fa-instagram" />
         </a>
-        <a :href="fbLink">
+        <a :href="fbLink" aria-label="facebook">
           <font-awesome-icon icon="fa-brands fa-square-facebook" />
         </a>
-        <a :href="bhLink">
+        <a :href="bhLink" aria-label="behance">
           <font-awesome-icon icon="fa-brands fa-behance" />
         </a>
       </div>
@@ -89,13 +90,13 @@ function openMenu() {
       </ul>
 
       <div class="flex justify-center space-x-10 p-4">
-        <a :href="igLink">
+        <a :href="igLink" aria-label="instagram">
           <font-awesome-icon icon="fa-brands fa-instagram" />
         </a>
-        <a :href="fbLink">
+        <a :href="fbLink" aria-label="facebook">
           <font-awesome-icon icon="fa-brands fa-square-facebook" />
         </a>
-        <a :href="bhLink">
+        <a :href="bhLink" aria-label="behance">
           <font-awesome-icon icon="fa-brands fa-behance" />
         </a>
       </div>
@@ -103,4 +104,10 @@ function openMenu() {
   </header>
 </template>
 
-<style scoped></style>
+<style scoped>
+.absolute {
+  position: absolute;
+  top: 0;
+  z-index: 20;
+}
+</style>
