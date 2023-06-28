@@ -105,11 +105,11 @@ let cards = [
     yt: "-jO69omrKnY",
   },
    {
-          title: 'No Marketing - Music Video',
-          work: 'Edición',
-          src: 'https://img.youtube.com/vi/1m1DmcMOkv4/maxresdefault.jpg',
-          yt: '1m1DmcMOkv4'
-        },
+    title: 'No Marketing - Music Video',
+    work: 'Edición',
+    src: 'https://img.youtube.com/vi/1m1DmcMOkv4/maxresdefault.jpg',
+    yt: '1m1DmcMOkv4'
+  },
   {
     title: "Piso con Flores REMIX - Music Video",
     work: "Dirección, Edición",
@@ -151,6 +151,18 @@ let cards = [
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/NiquNUx9zXw/maxresdefault.jpg",
     yt: "NiquNUx9zXw",
+  },
+  {
+    title: "Gatubella - Music Video",
+    work: "Edición",
+    src: "https://i.imgur.com/w7t2JPS.png",
+    yt: "2jOStSXiSeQ",
+  },
+  {
+    title: "A Cámara Lenta - Music Video",
+    work: "Dirección, Edición",
+    src: "https://i.imgur.com/N5j2XKB.png",
+    yt: "GEAFVMHQxdE",
   },
   {
     title: "06 - Music Video",
