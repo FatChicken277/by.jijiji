@@ -1,5 +1,5 @@
 <script setup>
-import { watchEffect, ref, onBeforeMount } from "vue";
+import { watchEffect, ref, onMounted } from "vue";
 import tailwindConfig from "../../tailwind.config.js";
 
 const video = ref("videos/Video01.mp4");
@@ -26,16 +26,31 @@ function loadVideo(src) {
   v.preload = "auto";
   v.src = src;
   document.body.appendChild(v);
-}
 
-function preloadVideos() {
-  Object.keys(backgrounds).forEach(function (key) {
-    loadVideo(backgrounds[key]);
+  return new Promise((resolve, reject) => {
+    v.addEventListener("loadeddata", () => {
+      resolve();
+    });
+
+    v.addEventListener("error", () => {
+      reject();
+    });
   });
 }
 
-onBeforeMount(() => {
-  preloadVideos();
+function preloadVideos() {
+  const videoPromises = Object.values(backgrounds).map((url) => loadVideo(url));
+
+  return Promise.all(videoPromises);
+}
+
+onMounted(async () => {
+  try {
+    await preloadVideos();
+    // All videos have been fully loaded
+  } catch (error) {
+    // An error occurred while loading the videos
+  }
 });
 
 function changeBg(index) {
