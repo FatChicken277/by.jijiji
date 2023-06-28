@@ -1,5 +1,5 @@
 <script setup>
-import { watchEffect, ref, onMounted } from "vue";
+import { watchEffect, ref, onBeforeMount } from "vue";
 import tailwindConfig from "../../tailwind.config.js";
 
 const video = ref("videos/Video01.mp4");
@@ -36,10 +36,12 @@ function preloadVideos() {
     const video = new Video();
     video.src = backgrounds[key];
     video.preload = "auto";
+    video.style.display = "none";
+    document.body.appendChild(video);
   });
 }
 
-onMounted(() => {
+onBeforeMount(() => {
   preloadVideos();
 });
 
