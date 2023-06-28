@@ -22,19 +22,20 @@ let backgrounds = {
 
 async function loadVideo(src) {
   const response = await fetch(src);
-  const blob = await response.blob();
-  const url = URL.createObjectURL(blob);
+  const buffer = await response.arrayBuffer();
+  const videoBlob = new Blob([buffer], { type: "video/mp4" });
+  const videoUrl = URL.createObjectURL(videoBlob);
 
   let v = document.createElement("video");
   v.style.display = "none";
   v.preload = "auto";
-  v.src = url;
+  v.src = videoUrl;
 
   document.body.appendChild(v);
 
   return await new Promise((resolve, reject) => {
     v.addEventListener("loadeddata", () => {
-      resolve(url);
+      resolve(videoUrl);
     });
 
     v.addEventListener("error", () => {
@@ -49,20 +50,20 @@ function preloadVideos() {
   return Promise.all(videoPromises);
 }
 
-const blobUrls = ref([]);
+const videoUrls = ref([]);
 
 onMounted(async () => {
   try {
-    blobUrls.value = await preloadVideos();
-    // All videos have been fully loaded and cached as Blob URLs
-    // You can store the blobUrls for later use, if needed
+    videoUrls.value = await preloadVideos();
+    // All videos have been fully loaded
+    // You can store the videoUrls for later use, if needed
   } catch (error) {
     // An error occurred while loading the videos
   }
 });
 
 function changeBg(index) {
-  video.value = blobUrls.value[index];
+  video.value = videoUrls.value[index];
 }
 
 let intervalId = 0;
