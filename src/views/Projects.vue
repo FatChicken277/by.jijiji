@@ -135,6 +135,12 @@ let cards = [
     yt: "kGwIpduda6Y",
   },
   {
+    title: "Lokisima - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/6jla7gzEGgI/maxresdefault.jpg",
+    yt: "6jla7gzEGgI",
+  },
+  {
     title: "Sadboy - Music Video",
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/NiquNUx9zXw/maxresdefault.jpg",
