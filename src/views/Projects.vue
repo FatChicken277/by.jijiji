@@ -12,7 +12,7 @@ let cards = [
     title: "Bota - Music Video",
     work: "Edición",
     src: "https://i.imgur.com/T9F2hPp.jpg",
-    yt: "8QpwXfd3zQ",
+    yt: "_8QpwXfd3zQ",
   },
    {
     title: "Plastic - Music Video",
