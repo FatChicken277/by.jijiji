@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 // Components
 const Header = () => import("../layouts/Header.vue");
@@ -50,7 +50,7 @@ const routes = [
 
 // Router
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes, // short for `routes: routes`
 });
 

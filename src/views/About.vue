@@ -8,7 +8,7 @@
     <div class="mt-[5rem] flex flex-col items-center xl:flex-row">
       <img
         class="aspect-square w-full sm:w-[70%] xl:mr-10 xl:h-full xl:w-[35%]"
-        src="https://byhaski.com/img/profile.f23236f8.jpeg"
+        src="../assets/profile.jpeg"
       />
       <div class="mt-10 flex flex-col text-lg xl:mt-0 xl:text-[1dvw]">
         <p>
