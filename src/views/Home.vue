@@ -1,5 +1,5 @@
 <script setup>
-import { watchEffect, ref } from "vue";
+import { watchEffect, ref, onMounted } from "vue";
 import tailwindConfig from "../../tailwind.config.js";
 
 const video = ref("videos/Video01.mp4");
