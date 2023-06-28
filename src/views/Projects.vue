@@ -78,7 +78,7 @@ let cards = [
     title: "Finco - Music Video",
     work: "Edición",
     src: "https://i.imgur.com/lEICVEO.png",
-    yt: "ZueYvOuX510E",
+    yt: "ZueYvOuX510",
   },
   {
     title: "Palabreo - Music Video",
