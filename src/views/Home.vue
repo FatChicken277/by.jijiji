@@ -20,6 +20,29 @@ let backgrounds = {
   13: "videos/Video13.mp4",
 };
 
+function Video(src, append) {
+  var v = document.createElement("video");
+  if (src != "") {
+    v.src = src;
+  }
+  if (append == true) {
+    document.body.appendChild(v);
+  }
+  return v;
+}
+
+function preloadVideos() {
+  Object.keys(backgrounds).forEach(function (key) {
+    const video = new Video();
+    video.src = backgrounds[key];
+    video.preload = "auto";
+  });
+}
+
+onMounted(() => {
+  preloadVideos();
+});
+
 function changeBg(index) {
   video.value = backgrounds[index];
 }
