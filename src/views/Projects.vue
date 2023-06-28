@@ -2,6 +2,72 @@
 import { ref, onMounted } from "vue";
 
 let cards = [
+      {
+    title: "Bota - Music Video",
+    work: "Edición",
+    src: "https://i.imgur.com/T9F2hPp.jpg",
+    yt: "8QpwXfd3zQ",
+  },
+   {
+    title: "Plastic - Music Video",
+    work: "Dirección, Edición",
+    src: "https://i.imgur.com/Vh3zQK2.png",
+    yt: "JCihXid0tmI",
+  },
+   {
+    title: "Doble Máscara - Music Video",
+    work: "Edición",
+    src: "https://i.imgur.com/EHrP7lK.jpg",
+    yt: "FyA8Us3eB4w",
+  },
+    {
+    title: "Click Clock - Music Video",
+    work: "Edición",
+    src: "https://i.imgur.com/2eFKBFf.png",
+    yt: "EgR8lPaV6rc",
+  },
+     {
+    title: "Promethazine - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/H9xrxDe1b28/maxresdefault.jpg",
+    yt: "H9xrxDe1b28",
+  },
+   {
+    title: "Todavía Te Quiero - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/tRTZBeJn23c/maxresdefault.jpg",
+    yt: "tRTZBeJn23c",
+  },
+     {
+    title: "Cachai - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/aAOtBT9Z8gM/maxresdefault.jpg",
+    yt: "aAOtBT9Z8gM",
+  },
+      {
+    title: "Swaggy - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/C_5DxCYbZ8g/maxresdefault.jpg",
+    yt: "C_5DxCYbZ8g",
+  },
+    {
+    title: "Deseos - Music Video",
+    work: "Edición",
+    src: "https://i.imgur.com/G0x0vEb.jpg",
+    yt: "FjjeJwY9qfc",
+  },
+    {
+    title: "My Way - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/HvcGbC2Aq5U/maxresdefault.jpg",
+    yt: "HvcGbC2Aq5U",
+  },
+   {
+    title: "Clásico - Music Video",
+    work: "Dirección, Edición",
+    src: "https://i.imgur.com/hIZSA8T.png",
+    yt: "GO84ySMFQr4",
+  },
    {
     title: "Finco - Music Video",
     work: "Edición",
@@ -32,6 +98,12 @@ let cards = [
     src: "https://img.youtube.com/vi/-jO69omrKnY/maxresdefault.jpg",
     yt: "-jO69omrKnY",
   },
+   {
+          title: 'No Marketing - Music Video',
+          work: 'Edición',
+          src: 'https://img.youtube.com/vi/1m1DmcMOkv4/maxresdefault.jpg',
+          yt: '1m1DmcMOkv4'
+        },
   {
     title: "Piso con Flores REMIX - Music Video",
     work: "Dirección, Edición",
