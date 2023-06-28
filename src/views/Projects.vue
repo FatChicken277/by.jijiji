@@ -3,6 +3,12 @@ import { ref, onMounted } from "vue";
 
 let cards = [
       {
+    title: "2 De Marzo - Music Video",
+    work: "Edición",
+    src: "https://i.imgur.com/85VT8WY.png",
+    yt: "h9--Bxd9EOg",
+  },
+      {
     title: "Bota - Music Video",
     work: "Edición",
     src: "https://i.imgur.com/T9F2hPp.jpg",
