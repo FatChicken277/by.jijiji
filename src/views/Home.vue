@@ -33,7 +33,7 @@ async function loadVideo(src) {
 
   document.body.appendChild(v);
 
-  v.load(); // Trigger explicit loading
+  v.load(); // Trigger explicit loading (ios fix??)
 
   return await new Promise((resolve, reject) => {
     v.addEventListener("loadeddata", () => {
