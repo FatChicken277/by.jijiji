@@ -32,9 +32,8 @@ let backgrounds = {
 
 async function loadVideo(src) {
   const response = await fetch(src);
-  const buffer = await response.arrayBuffer();
-  const videoBlob = new Blob([buffer], { type: "video/mp4" });
-  const videoUrl = URL.createObjectURL(videoBlob);
+  const blob = await response.blob();
+  const videoUrl = URL.createObjectURL(blob);
 
   let v = document.createElement("video");
   v.style.display = "none";
