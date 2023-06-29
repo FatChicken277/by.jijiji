@@ -124,6 +124,15 @@ watchEffect(() => {
       <h1>Loading: {{ progress }}%</h1>
     </div>
     <video
+      class="z-5 absolute h-full w-full object-cover"
+      src="../assets/overlay.mp4"
+      muted
+      autoplay
+      loop
+      preload="auto"
+      playsinline
+    ></video>
+    <video
       id="video"
       class="absolute h-full w-full object-cover"
       :src="video"
