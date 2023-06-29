@@ -4,6 +4,16 @@ import tailwindConfig from "../../tailwind.config.js";
 
 const video = ref("videos/Video01.mp4");
 
+const videoUrls = ref([]);
+
+const loadedVideos = ref(0);
+
+const progress = ref(0);
+const totalVideos = 13;
+
+let intervalId = 0;
+let activeIndex = 0;
+
 let backgrounds = {
   1: "videos/Video01.mp4",
   2: "videos/Video02.mp4",
@@ -37,6 +47,9 @@ async function loadVideo(src) {
 
   return await new Promise((resolve, reject) => {
     v.addEventListener("loadeddata", () => {
+      loadedVideos.value++;
+      progress.value = Math.round((loadedVideos.value / totalVideos) * 100);
+
       resolve(videoUrl);
     });
 
@@ -52,8 +65,6 @@ function preloadVideos() {
   return Promise.all(videoPromises);
 }
 
-const videoUrls = ref([]);
-
 onMounted(async () => {
   try {
     videoUrls.value = await preloadVideos();
@@ -67,9 +78,6 @@ onMounted(async () => {
 function changeBg(index) {
   video.value = videoUrls.value[index];
 }
-
-let intervalId = 0;
-let activeIndex = 0;
 
 function stopInterval() {
   clearInterval(intervalId);
@@ -109,6 +117,12 @@ watchEffect(() => {
 
 <template>
   <div class="h-[100dvh]">
+    <div
+      v-if="!(videoUrls.length === 13)"
+      class="absolute top-0 z-10 flex h-[100dvh] w-[100dvw] items-center justify-center bg-black"
+    >
+      <h1>Loading: {{ progress }}%</h1>
+    </div>
     <video
       id="video"
       class="absolute h-full w-full object-cover"
