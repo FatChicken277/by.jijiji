@@ -33,6 +33,8 @@ async function loadVideo(src) {
 
   document.body.appendChild(v);
 
+  v.load(); // Trigger explicit loading
+
   return await new Promise((resolve, reject) => {
     v.addEventListener("loadeddata", () => {
       resolve(videoUrl);
