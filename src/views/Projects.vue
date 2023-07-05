@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import VueLoadImage from "vue-load-image";
 
 let cards = [
   {
@@ -462,11 +463,18 @@ onMounted(() => {
         @click="openVideo(card.yt)"
         class="group relative my-2 flex aspect-video w-full cursor-pointer flex-col md:my-0 md:items-center md:justify-center"
       >
-        <img
-          class="aspect-video object-cover transition ease-in-out md:group-hover:opacity-10 md:group-hover:blur-sm"
-          :alt="card.title"
-          :src="card.src"
-        />
+        <VueLoadImage>
+          <template v-slot:image>
+            <img
+              class="aspect-video object-cover transition ease-in-out md:group-hover:opacity-10 md:group-hover:blur-sm"
+              :alt="card.title"
+              :src="card.src"
+            />
+          </template>
+          <template v-slot:preloader>
+            <img class="h-10 w-10" src="../assets/loading.gif" />
+          </template>
+        </VueLoadImage>
         <div
           class="flex flex-col break-words group-hover:flex md:absolute md:hidden md:items-center md:text-center"
         >
