@@ -118,7 +118,7 @@ watchEffect(() => {
   <div class="h-[100dvh]">
     <div
       v-if="!(videoUrls.length === 13)"
-      class="absolute top-0 z-10 flex h-[100dvh] w-[100dvw] items-center justify-center bg-black"
+      class="absolute top-0 z-[15] flex h-[100dvh] w-[100dvw] items-center justify-center bg-black"
     >
       <h1>Loading: {{ progress }}%</h1>
     </div>
