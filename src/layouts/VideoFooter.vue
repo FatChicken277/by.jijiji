@@ -13,7 +13,7 @@ const formattedDate = currentDate.toLocaleDateString("en-US", options);
 
 <template>
   <div
-    class="absolute bottom-0 z-10 mt-auto flex w-full justify-between p-5 align-baseline"
+    class="absolute bottom-0 z-20 mt-auto flex w-full justify-between p-5 align-baseline"
   >
     <div class="mt-auto flex divide-x text-xl xl:text-[2.5rem]">
       <h1 class="text-red-600">
