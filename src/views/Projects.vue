@@ -4,6 +4,12 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
   {
+    title: "Bélico - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/vnoZodRdVns/maxresdefault.jpg",
+    yt: "vnoZodRdVns",
+  },
+  {
     title: "2 De Marzo - Music Video",
     work: "Edición",
     src: "https://i.imgur.com/85VT8WY.png",
