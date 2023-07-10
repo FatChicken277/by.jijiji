@@ -5,7 +5,7 @@ const currentYear = date.getFullYear();
 
 <template>
   <div class="mt-10 flex w-full flex-col items-center justify-center p-10">
-    <span
+    <span class="text-center"
       >Website created by
       <a class="underline" href="https://www.instagram.com/aleejo.rc/"
         >@aleejo.rc</a

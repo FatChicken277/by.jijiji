@@ -406,7 +406,7 @@ function openVideo(code) {
 }
 
 function getCards(initial) {
-  from += 10;
+  from += 9;
   return cards.slice(initial, from);
 }
 
@@ -461,7 +461,7 @@ onMounted(() => {
         v-for="card in displayCards"
         :key="card.title"
         @click="openVideo(card.yt)"
-        class="group relative my-2 flex aspect-video w-full cursor-pointer flex-col md:my-0 md:items-center md:justify-center"
+        class="group relative my-2 flex aspect-video w-full cursor-pointer flex-col items-center md:my-0 md:justify-center"
       >
         <VueLoadImage>
           <template v-slot:image>
