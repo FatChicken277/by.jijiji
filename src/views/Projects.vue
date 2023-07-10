@@ -166,12 +166,6 @@ let cards = [
     yt: "2jOStSXiSeQ",
   },
   {
-    title: "A Cámara Lenta - Music Video",
-    work: "Dirección, Edición",
-    src: "https://i.imgur.com/N5j2XKB.png",
-    yt: "GEAFVMHQxdE",
-  },
-  {
     title: "06 - Music Video",
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/9mtV_Ir0nsE/maxresdefault.jpg",
