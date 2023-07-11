@@ -461,7 +461,7 @@ onMounted(() => {
         v-for="card in displayCards"
         :key="card.title"
         @click="openVideo(card.yt)"
-        class="group relative my-2 flex aspect-video w-full cursor-pointer flex-col items-center md:my-0 md:justify-center"
+        class="group relative my-2 flex aspect-video w-full cursor-pointer flex-col md:my-0 md:items-center md:justify-center"
       >
         <VueLoadImage>
           <template v-slot:image>
@@ -472,7 +472,9 @@ onMounted(() => {
             />
           </template>
           <template v-slot:preloader>
-            <img class="h-10 w-10" src="../assets/loading.gif" />
+            <div class="flex h-[10rem] w-full items-center justify-center">
+              <img class="h-10 w-10" src="../assets/loading.gif" />
+            </div>
           </template>
         </VueLoadImage>
         <div
