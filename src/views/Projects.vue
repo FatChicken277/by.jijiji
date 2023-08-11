@@ -12,13 +12,13 @@ let cards = [
   {
     title: "Cartier - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/aV6-YSH2-PY/maxresdefault.jpg",
+    src: "https://i.imgur.com/b0jV5iA.png",
     yt: "aV6-YSH2-PY",
   },
   {
     title: "Barrio de Oro - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/K_NmojZgxT4/maxresdefault.jpg",
+    src: "https://i.imgur.com/t3gWLPd.png",
     yt: "K_NmojZgxT4",
   },
   {
