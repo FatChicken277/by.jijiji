@@ -6,14 +6,14 @@ let cards = [
    {
     title: "Narcos Bandidos - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/vnoZodRdVns/maxresdefault.jpg",
-    yt: "vnoZodRdVns",
+    src: "https://img.youtube.com/vi/IPG4pW4N12M/maxresdefault.jpg",
+    yt: "IPG4pW4N12M",
   },
   {
     title: "Super Eazy - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/IPG4pW4N12M/maxresdefault.jpg",
-    yt: "IPG4pW4N12M",
+    src: "https://img.youtube.com/vi/lNmdB0HjYAI/maxresdefault.jpg",
+    yt: "lNmdB0HjYAI",
   },
   {
     title: "Cartier - Music Video",
