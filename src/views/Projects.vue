@@ -4,6 +4,30 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
   {
+    title: "Super Eazy - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/lNmdB0HjYAI/maxresdefault.jpg",
+    yt: "lNmdB0HjYAI",
+  },
+  {
+    title: "Cartier - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/aV6-YSH2-PY/maxresdefault.jpg",
+    yt: "aV6-YSH2-PY",
+  },
+  {
+    title: "Barrio de Oro - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/K_NmojZgxT4/maxresdefault.jpg",
+    yt: "K_NmojZgxT4",
+  },
+  {
+    title: "Pal Pueblo - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/j7YbnyP9JvE/maxresdefault.jpg",
+    yt: "j7YbnyP9JvE",
+  },
+  {
     title: "Simple - Music Video",
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/vY80SuGPaX4/maxresdefault.jpg",
