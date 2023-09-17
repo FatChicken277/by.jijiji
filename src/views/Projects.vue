@@ -28,12 +28,6 @@ let cards = [
     yt: "rK2SfyQG2R4",
   },
    {
-    title: "Se Viró - Music Video",
-    work: "Edición",
-    src: "https://img.youtube.com/vi/rK2SfyQG2R4/maxresdefault.jpg",
-    yt: "rK2SfyQG2R4",
-  },
-   {
     title: "UNDER - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/2J-FlE1ZwkE/maxresdefault.jpg",
