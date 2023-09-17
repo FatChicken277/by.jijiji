@@ -4,6 +4,42 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
    {
+    title: "Trendy - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/ppethsJ1pM4/maxresdefault.jpg",
+    yt: "ppethsJ1pM4",
+  },
+   {
+    title: "Ganjah - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/JZFtBb2EmkQ/maxresdefault.jpg",
+    yt: "JZFtBb2EmkQ",
+  },
+    {
+    title: "Carita Loca - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/_GrBLXU1vEY/maxresdefault.jpg",
+    yt: "_GrBLXU1vEY",
+  },
+   {
+    title: "Se Viró - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/rK2SfyQG2R4/maxresdefault.jpg",
+    yt: "rK2SfyQG2R4",
+  },
+   {
+    title: "Se Viró - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/rK2SfyQG2R4/maxresdefault.jpg",
+    yt: "rK2SfyQG2R4",
+  },
+   {
+    title: "UNDER - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/2J-FlE1ZwkE/maxresdefault.jpg",
+    yt: "2J-FlE1ZwkE",
+  },
+   {
     title: "Narcos Bandidos - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/IPG4pW4N12M/maxresdefault.jpg",
