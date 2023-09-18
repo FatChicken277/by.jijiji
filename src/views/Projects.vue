@@ -6,43 +6,43 @@ let cards = [
    {
     title: "Trendy - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/ppethsJ1pM4/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/ppethsJ1pM4/hqdefault.jpg",
     yt: "ppethsJ1pM4",
   },
    {
     title: "Ganjah - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/JZFtBb2EmkQ/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/JZFtBb2EmkQ/hqdefault.jpg",
     yt: "JZFtBb2EmkQ",
   },
     {
     title: "Carita Loca - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/_GrBLXU1vEY/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/_GrBLXU1vEY/hqdefault.jpg",
     yt: "_GrBLXU1vEY",
   },
    {
     title: "Se Viró - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/rK2SfyQG2R4/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/rK2SfyQG2R4/hqdefault.jpg",
     yt: "rK2SfyQG2R4",
   },
    {
     title: "UNDER - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/2J-FlE1ZwkE/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/2J-FlE1ZwkE/hqdefault.jpg",
     yt: "2J-FlE1ZwkE",
   },
    {
     title: "Narcos Bandidos - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/IPG4pW4N12M/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/IPG4pW4N12M/hqdefault.jpg",
     yt: "IPG4pW4N12M",
   },
   {
     title: "Super Eazy - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/lNmdB0HjYAI/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/lNmdB0HjYAI/hqdefault.jpg",
     yt: "lNmdB0HjYAI",
   },
   {
@@ -60,19 +60,19 @@ let cards = [
   {
     title: "Pal Pueblo - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/j7YbnyP9JvE/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/j7YbnyP9JvE/hqdefault.jpg",
     yt: "j7YbnyP9JvE",
   },
   {
     title: "Simple - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/vY80SuGPaX4/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/vY80SuGPaX4/hqdefault.jpg",
     yt: "vY80SuGPaX4",
   },
   {
     title: "Bélico - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/vnoZodRdVns/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/vnoZodRdVns/hqdefault.jpg",
     yt: "vnoZodRdVns",
   },
   {
@@ -108,25 +108,25 @@ let cards = [
   {
     title: "Promethazine - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/H9xrxDe1b28/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/H9xrxDe1b28/hqdefault.jpg",
     yt: "H9xrxDe1b28",
   },
   {
     title: "Todavía Te Quiero - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/tRTZBeJn23c/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/tRTZBeJn23c/hqdefault.jpg",
     yt: "tRTZBeJn23c",
   },
   {
     title: "Cachai - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/aAOtBT9Z8gM/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/aAOtBT9Z8gM/hqdefault.jpg",
     yt: "aAOtBT9Z8gM",
   },
   {
     title: "Swaggy - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/C_5DxCYbZ8g/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/C_5DxCYbZ8g/hqdefault.jpg",
     yt: "C_5DxCYbZ8g",
   },
   {
@@ -138,7 +138,7 @@ let cards = [
   {
     title: "My Way - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/HvcGbC2Aq5U/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/HvcGbC2Aq5U/hqdefault.jpg",
     yt: "HvcGbC2Aq5U",
   },
   {
@@ -156,13 +156,13 @@ let cards = [
   {
     title: "Palabreo - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/UpE7eAjN8XE/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/UpE7eAjN8XE/hqdefault.jpg",
     yt: "UpE7eAjN8XE",
   },
   {
     title: "Por Mí - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/VRDNh-FF9B4/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/VRDNh-FF9B4/hqdefault.jpg",
     yt: "VRDNh-FF9B4",
   },
   {
@@ -174,55 +174,55 @@ let cards = [
   {
     title: "Itagüi - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/-jO69omrKnY/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/-jO69omrKnY/hqdefault.jpg",
     yt: "-jO69omrKnY",
   },
   {
     title: "No Marketing - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/1m1DmcMOkv4/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/1m1DmcMOkv4/hqdefault.jpg",
     yt: "1m1DmcMOkv4",
   },
   {
     title: "Piso con Flores REMIX - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/fHxEPvelWKI/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/fHxEPvelWKI/hqdefault.jpg",
     yt: "fHxEPvelWKI",
   },
   {
     title: "Viernes XIII - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/vxgaQSXXROY/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/vxgaQSXXROY/hqdefault.jpg",
     yt: "vxgaQSXXROY",
   },
   {
     title: "Lit - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/zFmj8vMyEE0/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/zFmj8vMyEE0/hqdefault.jpg",
     yt: "zFmj8vMyEE0",
   },
   {
     title: "Aquella Noche - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/IRQ71rHqADQ/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/IRQ71rHqADQ/hqdefault.jpg",
     yt: "IRQ71rHqADQ",
   },
   {
     title: "No se siente bien - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/kGwIpduda6Y/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/kGwIpduda6Y/hqdefault.jpg",
     yt: "kGwIpduda6Y",
   },
   {
     title: "Lokisima - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/6jla7gzEGgI/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/6jla7gzEGgI/hqdefault.jpg",
     yt: "6jla7gzEGgI",
   },
   {
     title: "Sadboy - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/NiquNUx9zXw/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/NiquNUx9zXw/hqdefault.jpg",
     yt: "NiquNUx9zXw",
   },
   {
@@ -234,37 +234,37 @@ let cards = [
   {
     title: "06 - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/9mtV_Ir0nsE/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/9mtV_Ir0nsE/hqdefault.jpg",
     yt: "9mtV_Ir0nsE",
   },
   {
     title: "Medallo Shit - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/Kqz0aSLAO3E/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/Kqz0aSLAO3E/hqdefault.jpg",
     yt: "Kqz0aSLAO3E",
   },
   {
     title: "La Ubi - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/NaPS7phSKp4/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/NaPS7phSKp4/hqdefault.jpg",
     yt: "NaPS7phSKp4",
   },
   {
     title: "Blackjack - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/Pw78Gea1FW0/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/Pw78Gea1FW0/hqdefault.jpg",
     yt: "Pw78Gea1FW0",
   },
   {
     title: "Números - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/vaoYH19sKW4/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/vaoYH19sKW4/hqdefault.jpg",
     yt: "vaoYH19sKW4",
   },
   {
     title: "Todavía me piensas - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/u9Z7CZ4FCgs/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/u9Z7CZ4FCgs/hqdefault.jpg",
     yt: "u9Z7CZ4FCgs",
   },
   {
@@ -276,13 +276,13 @@ let cards = [
   {
     title: "No Pregunten - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/w7dDHpcVUsA/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/w7dDHpcVUsA/hqdefault.jpg",
     yt: "w7dDHpcVUsA",
   },
   {
     title: "Under Club - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/xOfgniX20fo/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/xOfgniX20fo/hqdefault.jpg",
     yt: "xOfgniX20fo",
   },
   {
@@ -300,13 +300,13 @@ let cards = [
   {
     title: "La Luna - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/a0yI4N8Qo3Y/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/a0yI4N8Qo3Y/hqdefault.jpg",
     yt: "a0yI4N8Qo3Y",
   },
   {
     title: "Sin Paranoias - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/a56eM-cVwNU/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/a56eM-cVwNU/hqdefault.jpg",
     yt: "a56eM-cVwNU",
   },
   {
@@ -318,7 +318,7 @@ let cards = [
   {
     title: "Gangoso World - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/svycs9c2KIc/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/svycs9c2KIc/hqdefault.jpg",
     yt: "svycs9c2KIc",
   },
   {
@@ -336,43 +336,43 @@ let cards = [
   {
     title: "Kien soy, K kiero - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/qM-Ir7wqGcs/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/qM-Ir7wqGcs/hqdefault.jpg",
     yt: "qM-Ir7wqGcs",
   },
   {
     title: "De la noche a la mañana - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/5gMzT2bn_bU/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/5gMzT2bn_bU/hqdefault.jpg",
     yt: "5gMzT2bn_bU",
   },
   {
     title: "Los Amantes - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/UjPp-pFLP-w/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/UjPp-pFLP-w/hqdefault.jpg",
     yt: "UjPp-pFLP-w",
   },
   {
     title: "11/11 - Music Video",
     work: "Oneshot",
-    src: "https://img.youtube.com/vi/HiFv_YvlcaE/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/HiFv_YvlcaE/hqdefault.jpg",
     yt: "HiFv_YvlcaE",
   },
   {
     title: "Chacales - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/iUvRnu6ucDA/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/iUvRnu6ucDA/hqdefault.jpg",
     yt: "iUvRnu6ucDA",
   },
   {
     title: "Puesto Pa Mí - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/rWrQVtEKmwY/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/rWrQVtEKmwY/hqdefault.jpg",
     yt: "rWrQVtEKmwY",
   },
   {
     title: "KIDD - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/NfAXHE4PDNw/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/NfAXHE4PDNw/hqdefault.jpg",
     yt: "NfAXHE4PDNw",
   },
   {
@@ -402,25 +402,25 @@ let cards = [
   {
     title: "Call Me Future - Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/5WffW-e_iHs/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/5WffW-e_iHs/hqdefault.jpg",
     yt: "5WffW-e_iHs",
   },
   {
     title: "AutentiK - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/XRGNCF41Wb0/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/XRGNCF41Wb0/hqdefault.jpg",
     yt: "XRGNCF41Wb0",
   },
   {
     title: "Esperan por ti - Music Video",
     work: "Oneshot",
-    src: "https://img.youtube.com/vi/yduDm4FXFrk/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/yduDm4FXFrk/hqdefault.jpg",
     yt: "yduDm4FXFrk",
   },
   {
     title: "Merchopercho - GTA Music Video",
     work: "Edición",
-    src: "https://img.youtube.com/vi/IX9vbw-sFsE/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/IX9vbw-sFsE/hqdefault.jpg",
     yt: "IX9vbw-sFsE",
   },
   {
@@ -456,7 +456,7 @@ let cards = [
   {
     title: "Tan Lejos - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/DELbaZMabaE/maxresdefault.jpg",
+    src: "https://img.youtube.com/vi/DELbaZMabaE/hqdefault.jpg",
     yt: "DELbaZMabaE",
   },
 ];
