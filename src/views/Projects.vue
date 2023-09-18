@@ -532,7 +532,7 @@ onMounted(() => {
         <VueLoadImage>
           <template v-slot:image>
             <img
-              class="aspect-video object-cover transition ease-in-out md:group-hover:opacity-10 md:group-hover:blur-sm"
+              class="h-full aspect-video object-cover transition ease-in-out md:group-hover:opacity-10 md:group-hover:blur-sm"
               :alt="card.title"
               :src="card.src"
             />
