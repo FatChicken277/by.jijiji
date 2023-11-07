@@ -4,6 +4,30 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
    {
+    title: "Stunt4 - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/DHNr2zeRGSc/hqdefault.jpg",
+    yt: "DHNr2zeRGSc",
+  },
+   {
+    title: "Juguito E' Piña - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/80I6zbGL7zI/hqdefault.jpg",
+    yt: "80I6zbGL7zI",
+  },
+   {
+    title: "Río - Music Video",
+    work: "Oneshot",
+    src: "https://img.youtube.com/vi/37aZfou8qSk/hqdefault.jpg",
+    yt: "37aZfou8qSk",
+  },
+   {
+    title: "NVIDIA - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/HkoguZmF_Vg/hqdefault.jpg",
+    yt: "HkoguZmF_Vg",
+  },
+   {
     title: "Trendy - Music Video",
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/ppethsJ1pM4/hqdefault.jpg",
