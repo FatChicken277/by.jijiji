@@ -4,6 +4,12 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
    {
+    title: "KAZAJISTÁN - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/r9mq2UXF3Y4/hqdefault.jpg",
+    yt: "r9mq2UXF3Y4",
+  },
+   {
     title: "OUIJA - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/UxQnMeAnSIE/hqdefault.jpg",
