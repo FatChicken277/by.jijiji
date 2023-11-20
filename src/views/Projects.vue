@@ -39,12 +39,14 @@ let cards = [
     src: "https://img.youtube.com/vi/HkoguZmF_Vg/hqdefault.jpg",
     yt: "HkoguZmF_Vg",
   },
+   /*
    {
     title: "Trendy - Music Video",
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/ppethsJ1pM4/hqdefault.jpg",
     yt: "ppethsJ1pM4",
   },
+  */
    {
     title: "Ganjah - Music Video",
     work: "Edición",
