@@ -33,12 +33,14 @@ let cards = [
     src: "https://img.youtube.com/vi/37aZfou8qSk/hqdefault.jpg",
     yt: "37aZfou8qSk",
   },
+    /*
    {
     title: "NVIDIA - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/HkoguZmF_Vg/hqdefault.jpg",
     yt: "HkoguZmF_Vg",
   },
+   */
    /*
    {
     title: "Trendy - Music Video",
