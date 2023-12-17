@@ -4,6 +4,30 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
    {
+    title: "METRALLO - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/kpG50uKYnM8/hqdefault.jpg",
+    yt: "kpG50uKYnM8",
+  },
+    {
+    title: "TU VENENO - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/jZ5vJMZvZx0/hqdefault.jpg",
+    yt: "jZ5vJMZvZx0",
+  },
+   {
+    title: "CUENTAS - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/gzBwHP-2yzU/hqdefault.jpg",
+    yt: "gzBwHP-2yzU",
+  },
+{
+    title: "HOES - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/u6SL-Zv8eTc/hqdefault.jpg",
+    yt: "u6SL-Zv8eTc",
+  },
+   {
     title: "KAZAJISTÁN - Music Video",
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/r9mq2UXF3Y4/hqdefault.jpg",
