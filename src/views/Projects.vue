@@ -4,6 +4,18 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
    {
+    title: "FORD - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/TGk3GrcrFGU/hqdefault.jpg",
+    yt: "TGk3GrcrFGU",
+  },
+   {
+    title: "EL DUEÑO DEL TRAP - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/E5SfkCjmqh8/hqdefault.jpg",
+    yt: "E5SfkCjmqh8",
+  },
+   {
     title: "METRALLO - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/kpG50uKYnM8/hqdefault.jpg",
