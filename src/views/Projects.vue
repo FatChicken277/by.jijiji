@@ -4,6 +4,24 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
    {
+    title: "VEO - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/LrnGg2XWPKA/hqdefault.jpg",
+    yt: "LrnGg2XWPKA",
+  },
+   {
+    title: "NO TE ENAMORES (REMIX) - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/ETWxcIX224I/hqdefault.jpg",
+    yt: "ETWxcIX224I",
+  },
+   {
+    title: "Élite - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/mXtuLjEktG4/hqdefault.jpg",
+    yt: "mXtuLjEktG4",
+  },
+   {
     title: "EN BAJITA - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/6wtN96ccHYU/hqdefault.jpg",
