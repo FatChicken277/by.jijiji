@@ -4,6 +4,24 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
    {
+    title: "EN BAJITA - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/6wtN96ccHYU/hqdefault.jpg",
+    yt: "6wtN96ccHYU",
+  },
+   {
+    title: "Le Piso La Cara - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/MQh1FTzyJfw/hqdefault.jpg",
+    yt: "MQh1FTzyJfw",
+  },
+   {
+    title: "302 - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/ucDkHGy6fWE/hqdefault.jpg",
+    yt: "ucDkHGy6fWE",
+  },
+   {
     title: "FORD - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/TGk3GrcrFGU/hqdefault.jpg",
