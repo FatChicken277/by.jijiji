@@ -4,6 +4,12 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
    {
+    title: "Anubis - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/VpgnF8aAo9U/hqdefault.jpg",
+    yt: "VpgnF8aAo9U",
+  },
+   {
     title: "VEO - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/LrnGg2XWPKA/hqdefault.jpg",
@@ -32,6 +38,12 @@ let cards = [
     work: "Edición",
     src: "https://img.youtube.com/vi/MQh1FTzyJfw/hqdefault.jpg",
     yt: "MQh1FTzyJfw",
+  },
+   {
+    title: "alasbuenasoalasmalas - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/rK4d05M0zmU/hqdefault.jpg",
+    yt: "rK4d05M0zmU",
   },
    {
     title: "302 - Music Video",
