@@ -4,6 +4,24 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
    {
+    title: "Adrenalina - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/xZwOcURKvdg/hqdefault.jpg",
+    yt: "xZwOcURKvdg",
+  },
+   {
+    title: "Algo Mejor 11/11 - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/K4dK76P1yA4/hqdefault.jpg",
+    yt: "K4dK76P1yA4",
+  },
+   {
+    title: "Swaggy - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/I0k31Hi1GmI/hqdefault.jpg",
+    yt: "I0k31Hi1GmI",
+  },
+   {
     title: "Anubis - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/VpgnF8aAo9U/hqdefault.jpg",
