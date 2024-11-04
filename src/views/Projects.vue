@@ -62,13 +62,13 @@ let cards = [
        work: "Edición",
        src: "https://img.youtube.com/vi/C3WDRDLrDho/hqdefault.jpg",
        yt: "C3WDRDLrDho",
-     },
-    {
+   },
+   {
        title: "La Facha - Music Video",
        work: "Edición",
        src: "https://img.youtube.com/vi/nSJEtoE5cvI/hqdefault.jpg",
        yt: "nSJEtoE5cvI",
-     },
+   },
     {
     title: "Materclass- Music Video",
     work: "Dirección",
