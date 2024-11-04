@@ -4,6 +4,54 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
      {
+    title: "Tom y Jerry - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/hgpzgePAluw/hqdefault.jpg",
+    yt: "hgpzgePAluw",
+  },
+     {
+    title: "Dopada - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/-_EEW1dq2pE/hqdefault.jpg",
+    yt: "-_EEW1dq2pE",
+  },
+      {
+    title: "Escapulario - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/dy7963DREbs/hqdefault.jpg",
+    yt: "dy7963DREbs",
+  },
+     {
+    title: "TOKI - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/hug5tV6N0nU/hqdefault.jpg",
+    yt: "hug5tV6N0nU",
+  },
+     {
+    title: "Si te vas - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/i901lCdZ3Dw/hqdefault.jpg",
+    yt: "i901lCdZ3Dw",
+  },
+     {
+    title: "LVB - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/e9OSCWZ8ZP0/hqdefault.jpg",
+    yt: "e9OSCWZ8ZP0",
+  },
+     {
+    title: "Safari - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/lyNgbjqFqEA/hqdefault.jpg",
+    yt: "lyNgbjqFqEA",
+  },
+     {
+    title: "Portales - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/bD3SDWGxF9/hqdefault.jpg",
+    yt: "bD3SDWGxF9",
+  },
+     {
     title: "ROLLIN - Music Video",
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/MQ5_-fnfnzU/hqdefault.jpg",
