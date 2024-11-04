@@ -4,6 +4,24 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
     {
+       title: "Escapulario - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/dy7963DREbs/hqdefault.jpg",
+       yt: "dy7963DREbs",
+     },
+    {
+       title: "TOKI - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/hug5tV6N0nU/hqdefault.jpg",
+       yt: "hug5tV6N0nU",
+     },
+    {
+       title: "Si te vas - Music Video",
+       work: "Edición"
+       src: "https://img.youtube.com/vi/i901lCdZ3Dw/hqdefault.jpg",
+       yt: "i901lCdZ3Dw",
+     },
+    {
        title: "LVB  - Music Video",
        work: "Dirección, Edición"
        src: "https://img.youtube.com/vi/e9OSCWZ8ZP0/hqdefault.jpg",
