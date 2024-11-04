@@ -3,6 +3,84 @@ import { ref, onMounted } from "vue";
 import VueLoadImage from "vue-load-image";
 
 let cards = [
+    {
+    title: "Materclass- Music Video",
+    work: "Dirección",
+    src: "https://img.youtube.com/vi/Hjxoh_M6Ors/hqdefault.jpg",
+    yt: "Hjxoh_M6Ors",
+  },
+    {
+       title: "La facha - Music Video",
+       work: "Edición",
+       src: "https://img.youtube.com/vi/nSJEtoE5cvI/hqdefault.jpg",
+       yt: "nSJEtoE5cvI",
+     },
+   {
+       title: "La reina de la noche - Music Video",
+       work: "Edición",
+       src: "https://img.youtube.com/vi/C3WDRDLrDho/hqdefault.jpg",
+       yt: "C3WDRDLrDho",
+     },
+    {
+       title: "ROLLIN - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/MQ5_-fnfnzU/hqdefault.jpg",
+       yt: "MQ5_-fnfnzU",
+     },
+    {
+       title: "Portales - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/bD3SDWGxF9s/hqdefault.jpg",
+       yt: "bD3SDWGxF9s",
+     },
+   {
+       title: "Safari - Music Video",
+       work: "Edición"
+       src: "https://img.youtube.com/vi/lyNgbjqFqEA/hqdefault.jpg",
+       yt: "lyNgbjqFqEA",
+     },
+   {
+       title: "LVB  - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/e9OSCWZ8ZP0/hqdefault.jpg",
+       yt: "e9OSCWZ8ZP0",
+     },
+   {
+       title: "Si te vas - Music Video",
+       work: "Edición"
+       src: "https://img.youtube.com/vi/i901lCdZ3Dw/hqdefault.jpg",
+       yt: "i901lCdZ3Dw",
+     },
+   {
+       title: "Si te vas - Music Video",
+       work: "Edición"
+       src: "https://img.youtube.com/vi/i901lCdZ3Dw/hqdefault.jpg",
+       yt: "i901lCdZ3Dw",
+     },
+   {
+       title: "TOKI - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/hug5tV6N0nU/hqdefault.jpg",
+       yt: "hug5tV6N0nU",
+     },
+   {
+       title: "Escapulario - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/dy7963DREbs/hqdefault.jpg",
+       yt: "dy7963DREbs",
+     },
+   {
+       title: "Dopada - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/-_EEW1dq2pE/hqdefault.jpg",
+       yt: "-_EEW1dq2pE",
+     },
+   {
+    title: "Dopada - Music Video",
+    work: "Dirección, Edición"
+    src: "https://img.youtube.com/vi/-_EEW1dq2pE/hqdefault.jpg",
+    yt: "-_EEW1dq2pE",
+  },
    {
     title: "Adrenalina - Music Video",
     work: "Edición",
