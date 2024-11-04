@@ -4,6 +4,12 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
     {
+    title: "Materclass- Music Video",
+    work: "Dirección",
+    src: "https://img.youtube.com/vi/Hjxoh_M6Ors/hqdefault.jpg",
+    yt: "Hjxoh_M6Ors",
+  },
+    {
     title: "Adrenalina - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/xZwOcURKvdg/hqdefault.jpg",
