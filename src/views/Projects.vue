@@ -356,12 +356,6 @@ let cards = [
     yt: "zFmj8vMyEE0",
   },
   {
-    title: "Aquella Noche - Music Video",
-    work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/IRQ71rHqADQ/hqdefault.jpg",
-    yt: "IRQ71rHqADQ",
-  },
-  {
     title: "No se siente bien - Music Video",
     work: "Dirección, Edición",
     src: "https://img.youtube.com/vi/kGwIpduda6Y/hqdefault.jpg",
