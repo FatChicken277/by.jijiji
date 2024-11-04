@@ -4,6 +4,18 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
      {
+       title: "ROLLIN - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/MQ5_-fnfnzU/hqdefault.jpg",
+       yt: "MQ5_-fnfnzU",
+     },
+    {
+       title: "La Reina de la noche - Music Video",
+       work: "Edición",
+       src: "https://img.youtube.com/vi/C3WDRDLrDho/hqdefault.jpg",
+       yt: "C3WDRDLrDho",
+   },
+     {
     title: "La Facha - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/nSJEtoE5cvI/hqdefault.jpg",
