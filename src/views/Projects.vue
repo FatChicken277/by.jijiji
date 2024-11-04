@@ -3,6 +3,12 @@ import { ref, onMounted } from "vue";
 import VueLoadImage from "vue-load-image";
 
 let cards = [
+     {
+       title: "Tom y Jerry - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/hgpzgePAluw/hqdefault.jpg",
+       yt: "hgpzgePAluw",
+     },
     {
        title: "Dopada - Music Video",
        work: "Dirección, Edición"
