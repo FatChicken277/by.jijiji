@@ -4,6 +4,12 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
     {
+       title: "Dopada - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/-_EEW1dq2pE/hqdefault.jpg",
+       yt: "-_EEW1dq2pE",
+     },
+    {
        title: "Escapulario - Music Video",
        work: "Dirección, Edición"
        src: "https://img.youtube.com/vi/dy7963DREbs/hqdefault.jpg",
