@@ -48,8 +48,8 @@ let cards = [
      {
     title: "Portales - Music Video",
     work: "Dirección, Edición",
-    src: "https://img.youtube.com/vi/bD3SDWGxF9/hqdefault.jpg",
-    yt: "bD3SDWGxF9",
+    src: "https://img.youtube.com/vi/bD3SDWGxF9s/hqdefault.jpg",
+    yt: "bD3SDWGxF9s",
   },
      {
     title: "ROLLIN - Music Video",
