@@ -4,6 +4,42 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
     {
+       title: "LVB  - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/e9OSCWZ8ZP0/hqdefault.jpg",
+       yt: "e9OSCWZ8ZP0",
+     },
+    {
+       title: "Safari - Music Video",
+       work: "Edición"
+       src: "https://img.youtube.com/vi/lyNgbjqFqEA/hqdefault.jpg",
+       yt: "lyNgbjqFqEA",
+     },
+    {
+       title: "Portales - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/bD3SDWGxF9s/hqdefault.jpg",
+       yt: "bD3SDWGxF9s",
+     },
+    {
+       title: "ROLLIN - Music Video",
+       work: "Dirección, Edición"
+       src: "https://img.youtube.com/vi/MQ5_-fnfnzU/hqdefault.jpg",
+       yt: "MQ5_-fnfnzU",
+     },
+    {
+       title: "La Reina de la noche - Music Video",
+       work: "Edición",
+       src: "https://img.youtube.com/vi/C3WDRDLrDho/hqdefault.jpg",
+       yt: "C3WDRDLrDho",
+     },
+    {
+       title: "La Facha - Music Video",
+       work: "Edición",
+       src: "https://img.youtube.com/vi/nSJEtoE5cvI/hqdefault.jpg",
+       yt: "nSJEtoE5cvI",
+     },
+    {
     title: "Materclass- Music Video",
     work: "Dirección",
     src: "https://img.youtube.com/vi/Hjxoh_M6Ors/hqdefault.jpg",
