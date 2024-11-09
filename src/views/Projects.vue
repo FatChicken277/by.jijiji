@@ -4,6 +4,12 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
      {
+    title: "DEFJAM - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/wbXsZFWX2GE/hqdefault.jpg",
+    yt: "wbXsZFWX2GE",
+  },
+     {
     title: "Tom y Jerry - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/hgpzgePAluw/hqdefault.jpg",
