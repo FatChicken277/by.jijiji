@@ -10,6 +10,12 @@ let cards = [
     yt: "wbXsZFWX2GE",
   },
      {
+    title: "Sexy Malacara - Music Video",
+    work: "Dirección, Edición",
+    src: "https://img.youtube.com/vi/GH7c8mv8yms/hqdefault.jpg",
+    yt: "GH7c8mv8yms",
+  },
+     {
     title: "Tom y Jerry - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/hgpzgePAluw/hqdefault.jpg",
