@@ -4,6 +4,12 @@ import VueLoadImage from "vue-load-image";
 
 let cards = [
      {
+    title: "Me quebraste - Music Video",
+    work: "Edición",
+    src: "https://img.youtube.com/vi/DQXoj7vzy8Y/hqdefault.jpg",
+    yt: "DQXoj7vzy8Y",
+  },
+     {
     title: "DEFJAM - Music Video",
     work: "Edición",
     src: "https://img.youtube.com/vi/wbXsZFWX2GE/hqdefault.jpg",
