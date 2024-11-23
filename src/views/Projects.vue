@@ -661,7 +661,7 @@ onMounted(() => {
       </div>
     </div>
     <!-- highlights -->
-    <div class="mx-5 mt-5 shadow-[0_0_10px_5px_rgba(255,215,0,0.6)]">
+    <div class="mx-5 mt-5 shadow-[0_0_10px_5px_rgba(255,255,255,0.6)]">
       <carousel
         :autoplay="1000"
         :transition="1000"
