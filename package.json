@@ -16,7 +16,8 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "vue": "^3.2.47",
     "vue-load-image": "^1.1.0",
-    "vue-router": "^4.2.2"
+    "vue-router": "^4.2.2",
+    "vue3-carousel": "^0.7.1"
   },
   "devDependencies": {
     "@emailjs/browser": "^3.11.0",

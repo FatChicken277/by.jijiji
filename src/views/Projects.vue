@@ -1,12 +1,16 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import VueLoadImage from "vue-load-image";
+
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
 let cards = [
   {
     title: "Me quebraste - Music Video",
     work: "Edición",
     yt: "DQXoj7vzy8Y",
+    highlight: true,
   },
   {
     title: "DEFJAM - Music Video",
@@ -22,6 +26,7 @@ let cards = [
     title: "Tom y Jerry - Music Video",
     work: "Edición",
     yt: "hgpzgePAluw",
+    highlight: true,
   },
   {
     title: "Dopada - Music Video",
@@ -52,6 +57,7 @@ let cards = [
     title: "Safari - Music Video",
     work: "Edición",
     yt: "lyNgbjqFqEA",
+    highlight: true,
   },
   {
     title: "Portales - Music Video",
@@ -82,6 +88,7 @@ let cards = [
     title: "Adrenalina - Music Video",
     work: "Edición",
     yt: "xZwOcURKvdg",
+    highlight: true,
   },
   {
     title: "Algo Mejor 11/11 - Music Video",
@@ -92,16 +99,19 @@ let cards = [
     title: "Swaggy - Music Video",
     work: "Edición",
     yt: "I0k31Hi1GmI",
+    highlight: true,
   },
   {
     title: "Anubis - Music Video",
     work: "Edición",
     yt: "VpgnF8aAo9U",
+    highlight: true,
   },
   {
     title: "VEO - Music Video",
     work: "Edición",
     yt: "LrnGg2XWPKA",
+    highlight: true,
   },
   {
     title: "NO TE ENAMORES (REMIX) - Music Video",
@@ -142,6 +152,7 @@ let cards = [
     title: "EL DUEÑO DEL TRAP - Music Video",
     work: "Edición",
     yt: "E5SfkCjmqh8",
+    highlight: true,
   },
   {
     title: "METRALLO - Music Video",
@@ -258,6 +269,7 @@ let cards = [
     title: "Bélico - Music Video",
     work: "Edición",
     yt: "vnoZodRdVns",
+    highlight: true,
   },
   {
     title: "2 De Marzo - Music Video",
@@ -384,11 +396,11 @@ let cards = [
     work: "Edición",
     yt: "2jOStSXiSeQ",
   },
-  {
+  /*   {
     title: "06 - Music Video",
     work: "Dirección, Edición",
     yt: "9mtV_Ir0nsE",
-  },
+  }, */
   {
     title: "Medallo Shit - Music Video",
     work: "Dirección, Edición",
@@ -597,9 +609,20 @@ function handleScroll() {
   }
 }
 
+const screenWidth = ref(window.innerWidth);
+
+const itemsToShow = computed(() => {
+  if (screenWidth.value < 640) return 1;
+  if (screenWidth.value < 768) return 2;
+  return 3;
+});
+
 onMounted(() => {
   displayCards.value = getCards(from);
   window.addEventListener("scroll", handleScroll);
+  window.addEventListener("resize", () => {
+    screenWidth.value = window.innerWidth;
+  });
 });
 </script>
 
@@ -637,6 +660,59 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    <!-- highlights -->
+    <div class="mx-5 mt-5 shadow-[0_0_10px_5px_rgba(255,215,0,0.6)]">
+      <carousel
+        :autoplay="1000"
+        :transition="1000"
+        :items-to-show="itemsToShow"
+        :wrap-around="true"
+        :pauseAutoplayOnHover="true"
+      >
+        <slide
+          v-for="(card, index) in cards.filter((card) => card.highlight)"
+          :key="index"
+        >
+          <div
+            @click="openVideo(card.yt)"
+            class="group relative my-2 flex aspect-video w-full cursor-pointer flex-col md:my-0 md:items-center md:justify-center"
+          >
+            <VueLoadImage class="w-full">
+              <template v-slot:image>
+                <img
+                  class="aspect-video w-full object-cover transition ease-in-out md:group-hover:opacity-10 md:group-hover:blur-sm"
+                  :alt="card.title"
+                  :src="`https://img.youtube.com/vi/${card.yt}/hqdefault.jpg`"
+                />
+              </template>
+              <template v-slot:preloader>
+                <div class="flex h-[10rem] w-full items-center justify-center">
+                  <img class="h-10 w-10" src="../assets/loading.gif" />
+                </div>
+              </template>
+            </VueLoadImage>
+            <div
+              class="hidden flex-col break-words md:absolute md:items-center md:text-center md:group-hover:flex"
+            >
+              <h1
+                class="mt-2 box-content break-words text-xl font-bold md:mt-0"
+              >
+                {{ card.title.toUpperCase() }}
+              </h1>
+              <h2 class="text-xs">{{ card.work.toUpperCase() }}</h2>
+            </div>
+          </div>
+        </slide>
+        <template #addons>
+          <navigation />
+          <pagination />
+        </template>
+      </carousel>
+    </div>
+    <!-- Grid -->
+    <h1 class="my-5 text-center text-xl font-bold md:my-10">
+      Lastest releases
+    </h1>
     <div class="grid grid-cols-1 gap-3 px-5 md:grid-cols-2 xl:grid-cols-3">
       <div
         v-for="card in displayCards"

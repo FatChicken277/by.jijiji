@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import router from "./router/index.js";
 import App from "./App.vue";
 
-// import style
+// Import custom styles
 import "./style.css";
 
 /* import the fontawesome core */
