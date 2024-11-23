@@ -710,9 +710,7 @@ onMounted(() => {
       </carousel>
     </div>
     <!-- Grid -->
-    <h1 class="my-5 text-center text-xl font-bold md:my-10">
-      Lastest releases
-    </h1>
+    <h1 class="my-5 text-center text-xl font-bold md:my-10">Latest releases</h1>
     <div class="grid grid-cols-1 gap-3 px-5 md:grid-cols-2 xl:grid-cols-3">
       <div
         v-for="card in displayCards"
