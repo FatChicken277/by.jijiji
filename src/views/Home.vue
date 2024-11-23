@@ -3,31 +3,30 @@ import { watchEffect, ref, onMounted } from "vue";
 import tailwindConfig from "../../tailwind.config.js";
 
 const video = ref("videos/lowres/Video01.mp4");
-
 const videoUrls = ref([]);
-
+const highResVideoUrls = ref([]);
 const loadedVideos = ref(0);
-
 const progress = ref(0);
 const totalVideos = 13;
+const highResLoaded = ref(false); // Flag to track if high-quality videos are loaded
 
 let intervalId = 0;
 let activeIndex = 0;
 
 let backgrounds = {
-  1: "videos/lowres/Video01.mp4",
-  2: "videos/lowres/Video02.mp4",
-  3: "videos/lowres/Video03.mp4",
-  4: "videos/lowres/Video04.mp4",
-  5: "videos/lowres/Video05.mp4",
-  6: "videos/lowres/Video06.mp4",
-  7: "videos/lowres/Video07.mp4",
-  8: "videos/lowres/Video08.mp4",
-  9: "videos/lowres/Video09.mp4",
-  10: "videos/lowres/Video10.mp4",
-  11: "videos/lowres/Video11.mp4",
-  12: "videos/lowres/Video12.mp4",
-  13: "videos/lowres/Video13.mp4",
+  1: { low: "videos/lowres/Video01.mp4", high: "videos/Video01.mp4" },
+  2: { low: "videos/lowres/Video02.mp4", high: "videos/Video02.mp4" },
+  3: { low: "videos/lowres/Video03.mp4", high: "videos/Video03.mp4" },
+  4: { low: "videos/lowres/Video04.mp4", high: "videos/Video04.mp4" },
+  5: { low: "videos/lowres/Video05.mp4", high: "videos/Video05.mp4" },
+  6: { low: "videos/lowres/Video06.mp4", high: "videos/Video06.mp4" },
+  7: { low: "videos/lowres/Video07.mp4", high: "videos/Video07.mp4" },
+  8: { low: "videos/lowres/Video08.mp4", high: "videos/Video08.mp4" },
+  9: { low: "videos/lowres/Video09.mp4", high: "videos/Video09.mp4" },
+  10: { low: "videos/lowres/Video10.mp4", high: "videos/Video10.mp4" },
+  11: { low: "videos/lowres/Video11.mp4", high: "videos/Video11.mp4" },
+  12: { low: "videos/lowres/Video12.mp4", high: "videos/Video12.mp4" },
+  13: { low: "videos/lowres/Video13.mp4", high: "videos/Video13.mp4" },
 };
 
 async function loadVideo(src) {
@@ -58,24 +57,39 @@ async function loadVideo(src) {
   });
 }
 
-function preloadVideos() {
-  const videoPromises = Object.values(backgrounds).map((url) => loadVideo(url));
+async function preloadLowResVideos() {
+  const videoPromises = Object.values(backgrounds).map((urls) =>
+    loadVideo(urls.low)
+  );
+  return Promise.all(videoPromises);
+}
 
+async function preloadHighResVideos() {
+  const videoPromises = Object.values(backgrounds).map((urls) =>
+    loadVideo(urls.high)
+  );
   return Promise.all(videoPromises);
 }
 
 onMounted(async () => {
   try {
-    videoUrls.value = await preloadVideos();
-    // All videos have been fully loaded
-    // You can store the videoUrls for later use, if needed
+    videoUrls.value = await preloadLowResVideos();
+    // Load high-resolution videos in the background after low-resolution videos are loaded
+    preloadHighResVideos().then((urls) => {
+      highResVideoUrls.value = urls;
+      highResLoaded.value = true; // Set the flag when high-quality videos are loaded
+    });
   } catch (error) {
     // An error occurred while loading the videos
   }
 });
 
 function changeBg(index) {
-  video.value = videoUrls.value[index];
+  if (highResLoaded.value) {
+    video.value = highResVideoUrls.value[index] || videoUrls.value[index];
+  } else {
+    video.value = videoUrls.value[index];
+  }
 }
 
 function stopInterval() {
@@ -91,7 +105,7 @@ function startInterval() {
     activeIndex = (activeIndex + 1) % Object.keys(backgrounds).length;
 
     changeBg(activeIndex);
-  }, 5000);
+  }, 3000);
 }
 
 watchEffect(() => {
