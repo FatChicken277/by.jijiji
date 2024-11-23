@@ -2,7 +2,7 @@
 import { watchEffect, ref, onMounted } from "vue";
 import tailwindConfig from "../../tailwind.config.js";
 
-const video = ref("videos/Video01.mp4");
+const video = ref("videos/lowres/Video01.mp4");
 
 const videoUrls = ref([]);
 
@@ -15,19 +15,19 @@ let intervalId = 0;
 let activeIndex = 0;
 
 let backgrounds = {
-  1: "videos/Video01.mp4",
-  2: "videos/Video02.mp4",
-  3: "videos/Video03.mp4",
-  4: "videos/Video04.mp4",
-  5: "videos/Video05.mp4",
-  6: "videos/Video06.mp4",
-  7: "videos/Video07.mp4",
-  8: "videos/Video08.mp4",
-  9: "videos/Video09.mp4",
-  10: "videos/Video10.mp4",
-  11: "videos/Video11.mp4",
-  12: "videos/Video12.mp4",
-  13: "videos/Video13.mp4",
+  1: "videos/lowres/Video01.mp4",
+  2: "videos/lowres/Video02.mp4",
+  3: "videos/lowres/Video03.mp4",
+  4: "videos/lowres/Video04.mp4",
+  5: "videos/lowres/Video05.mp4",
+  6: "videos/lowres/Video06.mp4",
+  7: "videos/lowres/Video07.mp4",
+  8: "videos/lowres/Video08.mp4",
+  9: "videos/lowres/Video09.mp4",
+  10: "videos/lowres/Video10.mp4",
+  11: "videos/lowres/Video11.mp4",
+  12: "videos/lowres/Video12.mp4",
+  13: "videos/lowres/Video13.mp4",
 };
 
 async function loadVideo(src) {
