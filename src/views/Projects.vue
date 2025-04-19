@@ -7,6 +7,36 @@ import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
 let cards = [
   {
+    title: "ALL STAR - Music Video",
+    work: "Dirección, Edición",
+    yt: "fL8M59brsrc",
+    highlight: true,
+  },
+  {
+    title: "Mami Gantel - Music Video",
+    work: "Edición",
+    yt: "QX51rEH7v-I",
+    highlight: true,
+  },
+  {
+    title: "FUAKETE - Music Video",
+    work: "Dirección, Edición",
+    yt: "MJLYAMPrKg4",
+    highlight: true,
+  },
+  {
+    title: "Rik el Aslan - Music Video",
+    work: "Edición",
+    yt: "ARCmX6HMFPY",
+    highlight: true,
+  },
+  {
+    title: "Date Cuenta - Music Video",
+    work: "Edición",
+    yt: "mT1JknrRpMs",
+    highlight: true,
+  },
+  {
     title: "Me quebraste - Music Video",
     work: "Edición",
     yt: "DQXoj7vzy8Y",
