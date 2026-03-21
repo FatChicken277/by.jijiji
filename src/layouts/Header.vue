@@ -45,13 +45,13 @@ function openMenu() {
       </ul>
 
       <div class="ml-5 space-x-5 px-5">
-        <a :href="igLink" aria-label="instagram">
+        <a :href="igLink" aria-label="instagram" target="_blank">
           <font-awesome-icon icon="fa-brands fa-instagram" />
         </a>
-        <a :href="fbLink" aria-label="facebook">
+        <a :href="fbLink" aria-label="facebook" target="_blank">
           <font-awesome-icon icon="fa-brands fa-square-facebook" />
         </a>
-        <a :href="bhLink" aria-label="behance">
+        <a :href="bhLink" aria-label="behance" target="_blank">
           <font-awesome-icon icon="fa-brands fa-behance" />
         </a>
       </div>
