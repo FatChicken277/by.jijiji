@@ -9,6 +9,7 @@ const VideoFooter = () => import("../layouts/VideoFooter.vue");
 const Projects = () => import("../views/Projects.vue");
 const About = () => import("../views/About.vue");
 const Contact = () => import("../views/Contact.vue");
+const Admin = () => import("../views/Admin.vue");
 
 // Routes
 const routes = [
@@ -46,12 +47,19 @@ const routes = [
       default: Contact,
     },
   },
+  {
+    path: "/admin",
+    name: "admin",
+    components: {
+      default: Admin,
+    },
+  },
 ];
 
 // Router
 const router = createRouter({
   history: createWebHashHistory(),
-  routes, // short for `routes: routes`
+  routes,
 });
 
 export default router;
