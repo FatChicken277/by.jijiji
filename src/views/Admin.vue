@@ -239,7 +239,6 @@ function logout() {
         <div class="mb-6 flex flex-wrap items-center gap-4">
           <input v-model="search" class="flex-1 border border-white/20 bg-transparent px-4 py-2 text-sm outline-none placeholder-white/30 focus:border-white/50" placeholder="BUSCAR POR TÍTULO, TRABAJO O ID..." />
           <button @click="filterHighlight = !filterHighlight" class="border px-4 py-2 text-xs tracking-widest transition" :class="filterHighlight ? 'border-white bg-white text-black' : 'border-white/20 hover:border-white/50'">⭐ SOLO HIGHLIGHTS</button>
-          <button @click="showResetConfirm = true" class="border border-white/10 px-4 py-2 text-xs tracking-widest text-white/30 transition hover:border-red-900/50 hover:text-red-400">RESTAURAR LISTA</button>
         </div>
 
         <p class="mb-4 text-xs text-white/30">
