@@ -5,7 +5,7 @@ import { useProjects } from "../composables/useProjects";
 const { getAll, addProject, updateProject, deleteProject, reorder, resetToDefaults } = useProjects();
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = "haski2024";
+const ADMIN_PASSWORD = "haski2026";
 const authed = ref(false);
 const pwInput = ref("");
 const pwError = ref(false);
