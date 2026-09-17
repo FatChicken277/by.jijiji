@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BY.HASKI</title>
+    <script>
+      // GitHub Pages sirve este archivo para cualquier ruta que no exista como
+      // archivo (por ejemplo /projects, que en una SPA resuelve el router).
+      // Se codifica la ruta en la query y se rebota a index.html, donde el
+      // snippet gemelo la restaura antes de que arranque Vue.
+      (function () {
+        var l = window.location;
+        l.replace(
+          l.protocol + "//" + l.hostname + (l.port ? ":" + l.port : "") +
+          "/?redirect=" + encodeURIComponent(l.pathname.slice(1) + l.search + l.hash)
+        );
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

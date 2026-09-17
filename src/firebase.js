@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
+// Esta config es publica por diseno: identifica el proyecto, no lo protege.
+// Lo que protege los datos son las reglas de seguridad de Firestore.
 const firebaseConfig = {
   apiKey: "AIzaSyDsxJhr-G43-VXJ7syK7TF-CrJP5JSdVVM",
   authDomain: "byhaski-624e8.firebaseapp.com",
@@ -12,3 +15,4 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const auth = getAuth(app);

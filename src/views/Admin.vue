@@ -1,37 +1,63 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase.js";
 import { useProjects } from "../composables/useProjects";
 
-const { getAll, addProject, updateProject, deleteProject, reorder, resetToDefaults } = useProjects();
+const { getAll, addProject, updateProject, deleteProject, reorder } = useProjects();
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = "haski2026";
+// Login real contra Firebase Auth. La version anterior comparaba con una
+// constante del codigo, que viajaba en texto plano dentro del bundle publico.
 const authed = ref(false);
-const pwInput = ref("");
-const pwError = ref(false);
+const checkingAuth = ref(true);
+const email = ref("");
+const password = ref("");
+const authError = ref("");
+const signingIn = ref(false);
 
-function login() {
-  if (pwInput.value === ADMIN_PASSWORD) {
-    authed.value = true;
-    pwError.value = false;
-    sessionStorage.setItem("bh_admin", "1");
-    loadCards();
-  } else {
-    pwError.value = true;
-    pwInput.value = "";
+const AUTH_ERRORS = {
+  "auth/invalid-email": "El email no es válido",
+  "auth/invalid-credential": "Email o contraseña incorrectos",
+  "auth/wrong-password": "Email o contraseña incorrectos",
+  "auth/user-not-found": "Email o contraseña incorrectos",
+  "auth/too-many-requests": "Demasiados intentos. Esperá unos minutos.",
+  "auth/network-request-failed": "Sin conexión con Firebase",
+};
+
+async function login() {
+  authError.value = "";
+  signingIn.value = true;
+  try {
+    await signInWithEmailAndPassword(auth, email.value.trim(), password.value);
+    password.value = "";
+  } catch (e) {
+    authError.value = AUTH_ERRORS[e.code] || "No se pudo iniciar sesión";
+  } finally {
+    signingIn.value = false;
   }
 }
 
-onMounted(async () => {
-  if (sessionStorage.getItem("bh_admin") === "1") {
-    authed.value = true;
-    await loadCards();
-  }
+async function logout() {
+  await signOut(auth);
+  cards.value = [];
+}
+
+let stopAuthListener = null;
+onMounted(() => {
+  // Firebase restaura la sesion sola entre recargas.
+  stopAuthListener = onAuthStateChanged(auth, async (user) => {
+    checkingAuth.value = false;
+    authed.value = !!user;
+    if (user) await loadCards();
+  });
 });
+onUnmounted(() => stopAuthListener && stopAuthListener());
 
 // ── State ─────────────────────────────────────────────────────────────────────
 const cards = ref([]);
 const loading = ref(false);
+const loadError = ref("");
 const search = ref("");
 const filterHighlight = ref(false);
 const toast = ref({ show: false, msg: "", type: "ok" });
@@ -40,12 +66,19 @@ const editTarget = ref(null);
 const showAddForm = ref(false);
 const newCard = ref({ title: "", work: "Edición", yt: "", highlight: false });
 const addError = ref("");
-const showResetConfirm = ref(false);
 
 async function loadCards() {
   loading.value = true;
-  cards.value = await getAll();
-  loading.value = false;
+  loadError.value = "";
+  try {
+    cards.value = await getAll();
+  } catch (e) {
+    // Sin lista de respaldo: mostrar el fallo es preferible a editar datos falsos.
+    cards.value = [];
+    loadError.value = e.message || "No se pudo leer la base de datos";
+  } finally {
+    loading.value = false;
+  }
 }
 
 const filtered = computed(() => {
@@ -59,6 +92,10 @@ const filtered = computed(() => {
   }
   return list;
 });
+
+// Reordenar con un filtro activo es ambiguo: la tabla muestra un subconjunto
+// pero el orden se guarda sobre la lista completa. Se bloquea el drag.
+const isFiltered = computed(() => filterHighlight.value || search.value.trim() !== "");
 
 const ytThumb = (id) => `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
 const ytLink = (id) => `https://youtube.com/watch?v=${id}`;
@@ -81,11 +118,15 @@ async function submitAdd() {
   if (!newCard.value.title.trim()) { addError.value = "El título es obligatorio"; return; }
   const id = extractYtId(newCard.value.yt);
   if (!id) { addError.value = "URL o ID de YouTube inválido"; return; }
-  await addProject({ ...newCard.value, yt: id });
-  await loadCards();
-  showToast("✔ Video agregado");
-  newCard.value = { title: "", work: "Edición", yt: "", highlight: false };
-  showAddForm.value = false;
+  try {
+    await addProject({ ...newCard.value, yt: id });
+    await loadCards();
+    showToast("✔ Video agregado");
+    newCard.value = { title: "", work: "Edición", yt: "", highlight: false };
+    showAddForm.value = false;
+  } catch (e) {
+    addError.value = "No se pudo guardar: " + e.message;
+  }
 }
 
 function startEdit(card) { editTarget.value = { ...card }; }
@@ -94,78 +135,118 @@ async function saveEdit() {
   if (!editTarget.value.title.trim()) return;
   const id = extractYtId(editTarget.value.yt);
   if (!id) return;
-  await updateProject(editTarget.value.id, { ...editTarget.value, yt: id });
-  await loadCards();
-  editTarget.value = null;
-  showToast("✔ Cambios guardados");
+  try {
+    await updateProject(editTarget.value.id, { ...editTarget.value, yt: id });
+    await loadCards();
+    editTarget.value = null;
+    showToast("✔ Cambios guardados");
+  } catch (e) {
+    showToast("✖ No se pudo guardar: " + e.message, "warn");
+  }
 }
 function cancelEdit() { editTarget.value = null; }
 
 function confirmDelete(id) { deleteConfirm.value = id; }
 async function execDelete() {
-  await deleteProject(deleteConfirm.value);
-  deleteConfirm.value = null;
-  await loadCards();
-  showToast("🗑 Video eliminado", "warn");
+  try {
+    await deleteProject(deleteConfirm.value);
+    deleteConfirm.value = null;
+    await loadCards();
+    showToast("🗑 Video eliminado", "warn");
+  } catch (e) {
+    deleteConfirm.value = null;
+    showToast("✖ No se pudo eliminar: " + e.message, "warn");
+  }
 }
 
 async function toggleHighlight(card) {
-  await updateProject(card.id, { highlight: !card.highlight });
-  await loadCards();
-  showToast(card.highlight ? "Quitado de highlights" : "⭐ Agregado a highlights");
+  try {
+    await updateProject(card.id, { highlight: !card.highlight });
+    await loadCards();
+    showToast(card.highlight ? "Quitado de highlights" : "⭐ Agregado a highlights");
+  } catch (e) {
+    showToast("✖ No se pudo actualizar: " + e.message, "warn");
+  }
 }
 
+// ── Drag & drop ───────────────────────────────────────────────────────────────
 let dragFromIdx = null;
+
 function onDragStart(e, idx) {
   dragFromIdx = idx;
   e.dataTransfer.effectAllowed = "move";
 }
+
+function onDragEnd() {
+  dragFromIdx = null;
+}
+
 async function onDrop(e, toCard) {
+  // Sin este guard, un drop que no salio de una fila (una imagen, un archivo
+  // arrastrado a la ventana) ejecutaba splice(null, 1) === splice(0, 1) y movia
+  // el primer video, reescribiendo el orden de toda la lista.
+  if (dragFromIdx === null || isFiltered.value) return;
+
   const toIdx = cards.value.findIndex((c) => c.id === toCard.id);
+  if (toIdx === -1 || toIdx === dragFromIdx) { dragFromIdx = null; return; }
+
   const newOrder = [...cards.value];
   const [moved] = newOrder.splice(dragFromIdx, 1);
   newOrder.splice(toIdx, 0, moved);
   cards.value = newOrder;
-  await reorder(newOrder);
   dragFromIdx = null;
-}
 
-async function execReset() {
-  await resetToDefaults();
-  await loadCards();
-  showResetConfirm.value = false;
-  showToast("Lista restaurada a los valores originales", "warn");
-}
-
-function logout() {
-  sessionStorage.removeItem("bh_admin");
-  authed.value = false;
+  try {
+    await reorder(newOrder);
+  } catch (e) {
+    showToast("✖ No se pudo guardar el orden: " + e.message, "warn");
+    await loadCards();
+  }
 }
 </script>
 
 <template>
+  <!-- ─── CHEQUEANDO SESIÓN ──────────────────────────────────────────────── -->
+  <div v-if="checkingAuth" class="flex min-h-screen items-center justify-center text-xs tracking-widest text-white/30">
+    CARGANDO...
+  </div>
+
   <!-- ─── LOGIN ──────────────────────────────────────────────────────────── -->
-  <div v-if="!authed" class="flex min-h-screen flex-col items-center justify-center px-6">
-    <div class="w-full max-w-sm border border-white/10 bg-zinc-950 p-10">
+  <div v-else-if="!authed" class="flex min-h-screen flex-col items-center justify-center px-6">
+    <form class="w-full max-w-sm border border-white/10 bg-zinc-950 p-10" @submit.prevent="login">
       <h1 class="mb-1 text-2xl tracking-widest">BY.HASKI</h1>
       <p class="mb-8 text-xs tracking-widest text-white/40">ADMIN PANEL</p>
-      <label class="mb-2 block text-xs tracking-widest text-white/60">CONTRASEÑA</label>
+
+      <label class="mb-2 block text-xs tracking-widest text-white/60">EMAIL</label>
       <input
-        v-model="pwInput"
-        type="password"
-        @keyup.enter="login"
+        v-model="email"
+        type="email"
+        autocomplete="username"
+        required
         class="w-full border border-white/20 bg-transparent px-4 py-3 text-sm tracking-widest outline-none focus:border-white/60"
-        placeholder="••••••••"
+        placeholder="tu@email.com"
         autofocus
       />
-      <p v-if="pwError" class="mt-2 text-xs text-red-400">Contraseña incorrecta</p>
+
+      <label class="mb-2 mt-5 block text-xs tracking-widest text-white/60">CONTRASEÑA</label>
+      <input
+        v-model="password"
+        type="password"
+        autocomplete="current-password"
+        required
+        class="w-full border border-white/20 bg-transparent px-4 py-3 text-sm tracking-widest outline-none focus:border-white/60"
+        placeholder="••••••••"
+      />
+
+      <p v-if="authError" class="mt-3 text-xs text-red-400">{{ authError }}</p>
       <button
-        @click="login"
-        class="mt-6 w-full bg-white py-3 text-xs font-bold tracking-widest text-black transition hover:bg-white/80"
+        type="submit"
+        :disabled="signingIn"
+        class="mt-6 w-full bg-white py-3 text-xs font-bold tracking-widest text-black transition hover:bg-white/80 disabled:opacity-40"
       >
-        ENTRAR
+        {{ signingIn ? "ENTRANDO..." : "ENTRAR" }}
       </button>
-    </div>
+    </form>
   </div>
 
   <!-- ─── PANEL ──────────────────────────────────────────────────────────── -->
@@ -193,6 +274,15 @@ function logout() {
       <!-- Loading -->
       <div v-if="loading" class="py-32 text-center text-xs tracking-widest text-white/30">
         CARGANDO VIDEOS...
+      </div>
+
+      <!-- Error de lectura -->
+      <div v-else-if="loadError" class="mt-8 border border-red-900/50 bg-red-950/20 p-8 text-center">
+        <p class="mb-2 text-sm font-bold tracking-widest text-red-300">NO SE PUDO CARGAR LA LISTA</p>
+        <p class="mb-6 text-xs text-white/40">{{ loadError }}</p>
+        <button @click="loadCards" class="border border-white/20 px-6 py-3 text-xs tracking-widest transition hover:border-white/60">
+          REINTENTAR
+        </button>
       </div>
 
       <div v-else>
@@ -243,8 +333,9 @@ function logout() {
 
         <p class="mb-4 text-xs text-white/30">
           {{ filtered.length }} de {{ cards.length }} videos
-          <span v-if="search || filterHighlight"> · filtrado</span>
-          <span class="ml-4 text-white/20">Arrastra las filas para reordenar</span>
+          <span v-if="isFiltered"> · filtrado</span>
+          <span v-if="isFiltered" class="ml-4 text-orange-400/60">Limpiá el filtro para poder reordenar</span>
+          <span v-else class="ml-4 text-white/20">Arrastra las filas para reordenar</span>
         </p>
 
         <!-- ─── TABLE ─────────────────────────────────────────────────────── -->
@@ -265,16 +356,18 @@ function logout() {
               <template v-for="card in filtered" :key="card.id">
                 <tr
                   v-if="!editTarget || editTarget.id !== card.id"
-                  draggable="true"
+                  :draggable="!isFiltered"
                   @dragstart="onDragStart($event, cards.indexOf(card))"
+                  @dragend="onDragEnd"
                   @dragover.prevent
                   @drop.prevent="onDrop($event, card)"
-                  class="group cursor-grab border-b border-white/5 transition hover:bg-white/5 active:cursor-grabbing"
+                  class="group border-b border-white/5 transition hover:bg-white/5"
+                  :class="isFiltered ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'"
                 >
-                  <td class="py-3 pr-3 text-white/20">⠿</td>
+                  <td class="py-3 pr-3" :class="isFiltered ? 'text-white/5' : 'text-white/20'">⠿</td>
                   <td class="py-2 pr-4">
                     <a :href="ytLink(card.yt)" target="_blank" class="block">
-                      <img :src="ytThumb(card.yt)" class="h-14 w-24 object-cover transition group-hover:opacity-80" :alt="card.title" />
+                      <img :src="ytThumb(card.yt)" draggable="false" class="h-14 w-24 object-cover transition group-hover:opacity-80" :alt="card.title" />
                     </a>
                   </td>
                   <td class="py-3 pr-4 font-medium leading-snug">{{ card.title }}</td>
@@ -342,20 +435,6 @@ function logout() {
           <div class="flex gap-4">
             <button @click="execDelete" class="bg-red-700 px-8 py-3 text-xs font-bold tracking-widest hover:bg-red-600">ELIMINAR</button>
             <button @click="deleteConfirm = null" class="border border-white/20 px-8 py-3 text-xs tracking-widest hover:border-white/50">CANCELAR</button>
-          </div>
-        </div>
-      </div>
-    </teleport>
-
-    <!-- ─── RESET CONFIRM MODAL ───────────────────────────────────────── -->
-    <teleport to="body">
-      <div v-if="showResetConfirm" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);">
-        <div class="border border-white/20 bg-zinc-950 p-8 text-center max-w-sm">
-          <p class="mb-2 text-lg font-bold tracking-widest">¿RESTAURAR LISTA?</p>
-          <p class="mb-8 text-xs text-white/40">Se perderán todos los cambios y se restaurará la lista original.</p>
-          <div class="flex gap-4 justify-center">
-            <button @click="execReset" class="bg-red-700 px-8 py-3 text-xs font-bold tracking-widest hover:bg-red-600">RESTAURAR</button>
-            <button @click="showResetConfirm = false" class="border border-white/20 px-8 py-3 text-xs tracking-widest hover:border-white/50">CANCELAR</button>
           </div>
         </div>
       </div>

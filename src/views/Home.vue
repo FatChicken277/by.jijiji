@@ -1,143 +1,141 @@
 <script setup>
-import { watchEffect, ref, onMounted } from "vue";
-import tailwindConfig from "../../tailwind.config.js";
+import { ref, onMounted, onUnmounted } from "vue";
 
-const video = ref("videos/lowres/Video01.mp4");
-const videoUrls = ref([]);
-const highResVideoUrls = ref([]);
-const loadedVideos = ref(0);
-const progress = ref(0);
-const totalVideos = 13;
-const highResLoaded = ref(false); // Flag to track if high-quality videos are loaded
+// Breakpoint "md" de Tailwind. Antes se leia importando tailwind.config.js, que
+// deja de ser fuente de verdad en Tailwind 4.
+const MD_BREAKPOINT = "768px";
 
-let intervalId = 0;
-let activeIndex = 0;
+const TOTAL = 13;
+const ROTATE_MS = 3000;
 
-let backgrounds = {
-  1: { low: "videos/lowres/Video01.mp4", high: "videos/Video01.mp4" },
-  2: { low: "videos/lowres/Video02.mp4", high: "videos/Video02.mp4" },
-  3: { low: "videos/lowres/Video03.mp4", high: "videos/Video03.mp4" },
-  4: { low: "videos/lowres/Video04.mp4", high: "videos/Video04.mp4" },
-  5: { low: "videos/lowres/Video05.mp4", high: "videos/Video05.mp4" },
-  6: { low: "videos/lowres/Video06.mp4", high: "videos/Video06.mp4" },
-  7: { low: "videos/lowres/Video07.mp4", high: "videos/Video07.mp4" },
-  8: { low: "videos/lowres/Video08.mp4", high: "videos/Video08.mp4" },
-  9: { low: "videos/lowres/Video09.mp4", high: "videos/Video09.mp4" },
-  10: { low: "videos/lowres/Video10.mp4", high: "videos/Video10.mp4" },
-  11: { low: "videos/lowres/Video11.mp4", high: "videos/Video11.mp4" },
-  12: { low: "videos/lowres/Video12.mp4", high: "videos/Video12.mp4" },
-  13: { low: "videos/lowres/Video13.mp4", high: "videos/Video13.mp4" },
-};
+// Rutas absolutas: con history mode la URL puede tener segmentos y una ruta
+// relativa resolveria contra ellos.
+const sources = Array.from({ length: TOTAL }, (_, i) => {
+  const n = String(i + 1).padStart(2, "0");
+  return { low: `/videos/lowres/Video${n}.mp4`, high: `/videos/Video${n}.mp4` };
+});
 
-async function loadVideo(src) {
-  const response = await fetch(src);
-  const blob = await response.blob();
-  const videoUrl = URL.createObjectURL(blob);
+const activeIndex = ref(0);
+const isMobile = ref(false);
+// Se empieza en baja y se sube a alta cuando termino de precargarse, igual que
+// antes. El hover tiene que ser instantaneo: si el archivo no esta en cache, el
+// <video> se recrea y queda en negro mientras descarga.
+const quality = ref("low");
+const video = ref(sources[0].low);
 
-  let v = document.createElement("video");
-  v.style.display = "none";
-  v.preload = "auto";
-  v.src = videoUrl;
+function srcFor(index) {
+  const s = sources[index] || sources[0];
+  return s[quality.value];
+}
 
-  document.body.appendChild(v);
+function changeBg(index) {
+  activeIndex.value = index;
+  video.value = srcFor(index);
+}
 
-  v.load(); // Trigger explicit loading (ios fix??)
+// ── Precarga ──────────────────────────────────────────────────────────────────
+// En segundo plano y de a uno, para no pelear por el ancho de banda con el video
+// que se esta viendo. A diferencia de la version anterior no se usa
+// fetch -> createObjectURL (que retenia los 43 MB en memoria y nunca llamaba a
+// revokeObjectURL): alcanza con que el archivo quede en la cache HTTP.
+let preloaders = [];
+let cancelled = false;
 
-  return await new Promise((resolve, reject) => {
-    v.addEventListener("loadeddata", () => {
-      loadedVideos.value++;
-      progress.value = Math.round((loadedVideos.value / totalVideos) * 100);
-
-      resolve(videoUrl);
-    });
-
-    v.addEventListener("error", () => {
-      reject();
-    });
+function preload(src) {
+  return new Promise((resolve) => {
+    const v = document.createElement("video");
+    v.preload = "auto";
+    v.muted = true;
+    v.playsInline = true;
+    v.style.display = "none";
+    const done = () => resolve();
+    v.addEventListener("canplaythrough", done, { once: true });
+    v.addEventListener("error", done, { once: true });
+    v.src = src;
+    document.body.appendChild(v);
+    preloaders.push(v);
+    v.load();
   });
 }
 
-async function preloadLowResVideos() {
-  const videoPromises = Object.values(backgrounds).map((urls) =>
-    loadVideo(urls.low)
-  );
-  return Promise.all(videoPromises);
-}
-
-async function preloadHighResVideos() {
-  const videoPromises = Object.values(backgrounds).map((urls) =>
-    loadVideo(urls.high)
-  );
-  return Promise.all(videoPromises);
-}
-
-onMounted(async () => {
-  try {
-    videoUrls.value = await preloadLowResVideos();
-    // Load high-resolution videos in the background after low-resolution videos are loaded
-    preloadHighResVideos().then((urls) => {
-      highResVideoUrls.value = urls;
-      highResLoaded.value = true; // Set the flag when high-quality videos are loaded
-    });
-  } catch (error) {
-    // An error occurred while loading the videos
+async function preloadSequence() {
+  // Primero las de baja: son livianas y dejan el hover utilizable enseguida.
+  for (const s of sources) {
+    if (cancelled) return;
+    await preload(s.low);
   }
-});
+  // En mobile no se usan las de alta: no tiene sentido bajar 32 MB.
+  if (cancelled || isMobile.value) return;
 
-function changeBg(index) {
-  if (highResLoaded.value) {
-    video.value = highResVideoUrls.value[index] || videoUrls.value[index];
-  } else {
-    video.value = videoUrls.value[index];
+  for (const s of sources) {
+    if (cancelled) return;
+    await preload(s.high);
   }
+  if (cancelled) return;
+
+  quality.value = "high";
+  video.value = srcFor(activeIndex.value);
 }
 
+function clearPreloaders() {
+  preloaders.forEach((v) => {
+    v.removeAttribute("src");
+    v.load();
+    v.remove();
+  });
+  preloaders = [];
+}
+
+// ── Rotacion en mobile ────────────────────────────────────────────────────────
+let intervalId = 0;
 function stopInterval() {
   clearInterval(intervalId);
+  intervalId = 0;
 }
-
 function startInterval() {
-  stopInterval(); // Ensure only one interval is running at a time
-
-  changeBg(activeIndex);
-
+  stopInterval();
+  changeBg(activeIndex.value);
   intervalId = setInterval(() => {
-    activeIndex = (activeIndex + 1) % Object.keys(backgrounds).length;
-
-    changeBg(activeIndex);
-  }, 3000);
+    changeBg((activeIndex.value + 1) % TOTAL);
+  }, ROTATE_MS);
 }
 
-watchEffect(() => {
-  const mediaQuery = window.matchMedia(
-    `(max-width: ${tailwindConfig.theme.screens.md})`
-  );
-  const handleResize = () => {
-    if (mediaQuery.matches) {
-      startInterval();
-    } else {
-      stopInterval();
-    }
-  };
-  mediaQuery.addEventListener("change", handleResize);
-  handleResize(); // Call the handler immediately to handle the initial state
-  // Cleanup the event listener when no longer needed
-  return () => {
-    mediaQuery.removeEventListener("change", handleResize);
-  };
+// El watchEffect anterior devolvia una funcion de limpieza, pero watchEffect
+// ignora el valor de retorno (la limpieza va por el callback onCleanup). El
+// listener quedaba vivo y el intervalo seguia corriendo al cambiar de seccion.
+const mediaQuery = window.matchMedia(`(max-width: ${MD_BREAKPOINT})`);
+
+function handleMediaChange() {
+  isMobile.value = mediaQuery.matches;
+  if (mediaQuery.matches) {
+    startInterval();
+  } else {
+    stopInterval();
+  }
+}
+
+onMounted(() => {
+  mediaQuery.addEventListener("change", handleMediaChange);
+  handleMediaChange();
+  preloadSequence();
+});
+
+onUnmounted(() => {
+  cancelled = true;
+  mediaQuery.removeEventListener("change", handleMediaChange);
+  stopInterval();
+  clearPreloaders();
 });
 </script>
 
 <template>
   <div class="h-[100dvh]">
-    <div
-      v-if="!(videoUrls.length === 13)"
-      class="absolute top-0 z-[15] flex h-[100dvh] w-[100dvw] items-center justify-center bg-black"
-    >
-      <h1>Loading: {{ progress }}%</h1>
-    </div>
+    <!-- Sin z-index: el apilado lo da el orden del DOM (overlay, fondo, logo).
+         Este elemento pedia z-index 5, valor que Tailwind 3 ignoraba por estar
+         fuera de su escala (0/10/20/30/40/50). Tailwind 4 si lo genera, y el
+         overlay pasaba a tapar el video de fondo y el logo. -->
     <video
-      class="z-5 absolute h-full w-full object-cover"
+      class="absolute h-full w-full object-cover"
       src="../assets/overlay.mp4"
       muted
       autoplay
@@ -163,7 +161,7 @@ watchEffect(() => {
       class="relative hidden md:z-10 md:grid md:h-full md:grid-flow-col md:py-20"
     >
       <div
-        v-for="(value, index) in 13"
+        v-for="(value, index) in TOTAL"
         :key="index"
         @mouseover="changeBg(index)"
         class="group flex justify-center"
