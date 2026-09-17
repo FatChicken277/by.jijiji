@@ -132,24 +132,15 @@ export function useProjects() {
     try {
       const q = query(collection(db, COL), orderBy("order", "asc"));
       const snap = await getDocs(q);
-      if (snap.empty) {
-        await seedDefaults();
-        return DEFAULT_CARDS;
-      }
+      // Una lectura nunca escribe. Antes, si esta consulta volvia vacia, se
+      // sembraban los 109 DEFAULT_CARDS: el 17/09/2026 eso reescribio el campo
+      // "order" de toda la coleccion y desordeno el portfolio. Si no hay
+      // documentos, la lista simplemente viene vacia.
       return snap.docs.map((d) => d.data());
     } catch (e) {
       console.error("Firebase getAll error:", e);
       return DEFAULT_CARDS;
     }
-  }
-
-  async function seedDefaults() {
-    const batch = writeBatch(db);
-    DEFAULT_CARDS.forEach((card) => {
-      const ref = doc(db, COL, String(card.id));
-      batch.set(ref, card);
-    });
-    await batch.commit();
   }
 
   async function addProject(project) {
