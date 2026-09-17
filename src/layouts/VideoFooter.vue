@@ -15,14 +15,14 @@ const formattedDate = currentDate.toLocaleDateString("en-US", options);
   <div
     class="absolute bottom-0 z-20 mt-auto flex w-full justify-between p-5 align-baseline"
   >
-    <div class="mt-auto flex divide-x text-xl xl:text-[2.5rem]">
+    <div class="mt-auto flex divide-x divide-gray-200 text-xl xl:text-[2.5rem]">
       <h1 class="text-red-600">
         REC <font-awesome-icon icon="fa-solid fa-circle" />
       </h1>
     </div>
 
     <div
-      class="mt-auto flex flex-col text-right text-xl md:flex-row md:divide-x xl:text-[2.5rem]"
+      class="mt-auto flex flex-col text-right text-xl md:flex-row md:divide-x md:divide-gray-200 xl:text-[2.5rem]"
     >
       <TimeCounter class="md:px-5" />
       <h1 class="md:px-5">{{ formattedDate }}</h1>

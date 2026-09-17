@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 // Components
 const Header = () => import("../layouts/Header.vue");
@@ -58,8 +58,15 @@ const routes = [
 
 // Router
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
+
+// El sitio uso URLs con hash (byhaski.com/#/projects) hasta 2026-09. Los links
+// que quedaron dando vueltas se redirigen a la ruta equivalente sin hash.
+const legacyHash = window.location.hash;
+if (legacyHash.startsWith("#/")) {
+  router.replace(legacyHash.slice(1));
+}
 
 export default router;

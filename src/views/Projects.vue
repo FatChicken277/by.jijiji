@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 import VueLoadImage from "vue-load-image";
 import { useProjects } from "../composables/useProjects";
 
@@ -11,6 +11,7 @@ const { getAll } = useProjects();
 const allCards = ref([]);
 const displayCards = ref([]);
 const loading = ref(true);
+const error = ref("");
 let from = 0;
 const BATCH = 9;
 
@@ -42,13 +43,35 @@ function handleScroll() {
   }
 }
 
+// Con nombre para poder removerlo en onUnmounted. Como arrow inline era
+// imposible de desregistrar y se acumulaba uno por cada visita a /projects.
+function handleResize() {
+  screenWidth.value = window.innerWidth;
+}
+
+async function load() {
+  loading.value = true;
+  error.value = "";
+  try {
+    allCards.value = await getAll();
+    from = 0;
+    displayCards.value = getNextBatch();
+  } catch (e) {
+    error.value = e.message || "No se pudieron cargar los videos";
+  } finally {
+    loading.value = false;
+  }
+}
+
 onMounted(async () => {
-  allCards.value = await getAll();
-  from = 0;
-  displayCards.value = getNextBatch();
-  loading.value = false;
+  await load();
   window.addEventListener("scroll", handleScroll);
-  window.addEventListener("resize", () => { screenWidth.value = window.innerWidth; });
+  window.addEventListener("resize", handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("resize", handleResize);
 });
 </script>
 
@@ -57,6 +80,15 @@ onMounted(async () => {
     <!-- Loading -->
     <div v-if="loading" class="absolute top-0 z-[15] flex h-[100dvh] w-[100dvw] items-center justify-center bg-black">
       <h1>Loading...</h1>
+    </div>
+
+    <!-- Error -->
+    <div v-else-if="error" class="absolute top-0 z-[15] flex h-[100dvh] w-[100dvw] flex-col items-center justify-center bg-black px-8 text-center">
+      <h1 class="mb-3 text-xl">No se pudieron cargar los videos</h1>
+      <p class="mb-8 text-sm text-white/40">{{ error }}</p>
+      <button @click="load" class="border-2 border-white px-8 py-3 text-sm tracking-widest transition hover:bg-white hover:text-black">
+        REINTENTAR
+      </button>
     </div>
 
     <!-- Video popup -->
@@ -86,7 +118,7 @@ onMounted(async () => {
       </div>
     </div>
 
-    <div v-if="!loading">
+    <div v-if="!loading && !error">
       <!-- Highlights carousel -->
       <div class="mx-5 mt-5 shadow-[0_0_40px_0_rgba(255,255,255,0.4)]">
         <carousel
