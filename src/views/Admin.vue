@@ -1,38 +1,47 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase.js";
 import { useProjects } from "../composables/useProjects";
 
 const { getAll, addProject, updateProject, deleteProject, reorder } = useProjects();
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
-// Login real contra Firebase Auth. La version anterior comparaba con una
-// constante del codigo, que viajaba en texto plano dentro del bundle publico.
+// Login con la cuenta de Google contra Firebase Auth. La version anterior
+// comparaba con una constante del codigo, que viajaba en texto plano dentro del
+// bundle publico y ademas no impedia escribir en Firestore por fuera del panel.
+//
+// Quien puede administrar el sitio se decide en DOS lugares y los dos tienen que
+// coincidir: esta lista y las reglas de seguridad de Firestore. La barrera real
+// son las reglas; esta lista solo evita mostrar un panel que no podria guardar.
+const ALLOWED_EMAILS = ["haski.audiovisual@gmail.com"];
+
 const authed = ref(false);
 const checkingAuth = ref(true);
-const email = ref("");
-const password = ref("");
+const userEmail = ref("");
 const authError = ref("");
 const signingIn = ref(false);
 
 const AUTH_ERRORS = {
-  "auth/invalid-email": "El email no es válido",
-  "auth/invalid-credential": "Email o contraseña incorrectos",
-  "auth/wrong-password": "Email o contraseña incorrectos",
-  "auth/user-not-found": "Email o contraseña incorrectos",
-  "auth/too-many-requests": "Demasiados intentos. Esperá unos minutos.",
+  "auth/popup-closed-by-user": "Cerraste la ventana antes de terminar",
+  "auth/cancelled-popup-request": "",
+  "auth/popup-blocked": "El navegador bloqueó la ventana emergente. Permitila y probá de nuevo.",
   "auth/network-request-failed": "Sin conexión con Firebase",
+  "auth/unauthorized-domain": "Este dominio no está autorizado en Firebase (Authentication → Settings → Authorized domains)",
+  "auth/operation-not-allowed": "Falta habilitar el proveedor Google en Firebase",
 };
 
 async function login() {
   authError.value = "";
   signingIn.value = true;
   try {
-    await signInWithEmailAndPassword(auth, email.value.trim(), password.value);
-    password.value = "";
+    const provider = new GoogleAuthProvider();
+    // Fuerza el selector de cuenta: sin esto reutiliza la sesion de Google
+    // activa en el navegador y no deja elegir con cual entrar.
+    provider.setCustomParameters({ prompt: "select_account" });
+    await signInWithPopup(auth, provider);
   } catch (e) {
-    authError.value = AUTH_ERRORS[e.code] || "No se pudo iniciar sesión";
+    authError.value = AUTH_ERRORS[e.code] ?? "No se pudo iniciar sesión";
   } finally {
     signingIn.value = false;
   }
@@ -48,8 +57,23 @@ onMounted(() => {
   // Firebase restaura la sesion sola entre recargas.
   stopAuthListener = onAuthStateChanged(auth, async (user) => {
     checkingAuth.value = false;
-    authed.value = !!user;
-    if (user) await loadCards();
+
+    if (!user) {
+      authed.value = false;
+      userEmail.value = "";
+      return;
+    }
+
+    if (!ALLOWED_EMAILS.includes(user.email)) {
+      authError.value = `La cuenta ${user.email} no tiene permiso para administrar el sitio`;
+      await signOut(auth);
+      return;
+    }
+
+    authError.value = "";
+    authed.value = true;
+    userEmail.value = user.email;
+    await loadCards();
   });
 });
 onUnmounted(() => stopAuthListener && stopAuthListener());
@@ -224,40 +248,29 @@ async function onDrop(e, toCard) {
 
   <!-- ─── LOGIN ──────────────────────────────────────────────────────────── -->
   <div v-else-if="!authed" class="flex min-h-screen flex-col items-center justify-center px-6">
-    <form class="w-full max-w-sm border border-white/10 bg-zinc-950 p-10" @submit.prevent="login">
+    <div class="w-full max-w-sm border border-white/10 bg-zinc-950 p-10 text-center">
       <h1 class="mb-1 text-2xl tracking-widest">BY.HASKI</h1>
-      <p class="mb-8 text-xs tracking-widest text-white/40">ADMIN PANEL</p>
+      <p class="mb-10 text-xs tracking-widest text-white/40">ADMIN PANEL</p>
 
-      <label class="mb-2 block text-xs tracking-widest text-white/60">EMAIL</label>
-      <input
-        v-model="email"
-        type="email"
-        autocomplete="username"
-        required
-        class="w-full border border-white/20 bg-transparent px-4 py-3 text-sm tracking-widest outline-none focus:border-white/60"
-        placeholder="tu@email.com"
-        autofocus
-      />
-
-      <label class="mb-2 mt-5 block text-xs tracking-widest text-white/60">CONTRASEÑA</label>
-      <input
-        v-model="password"
-        type="password"
-        autocomplete="current-password"
-        required
-        class="w-full border border-white/20 bg-transparent px-4 py-3 text-sm tracking-widest outline-none focus:border-white/60"
-        placeholder="••••••••"
-      />
-
-      <p v-if="authError" class="mt-3 text-xs text-red-400">{{ authError }}</p>
       <button
-        type="submit"
+        @click="login"
         :disabled="signingIn"
-        class="mt-6 w-full bg-white py-3 text-xs font-bold tracking-widest text-black transition hover:bg-white/80 disabled:opacity-40"
+        class="flex w-full items-center justify-center gap-3 bg-white py-3 text-xs font-bold tracking-widest text-black transition hover:bg-white/80 disabled:opacity-40"
       >
-        {{ signingIn ? "ENTRANDO..." : "ENTRAR" }}
+        <svg v-if="!signingIn" class="h-4 w-4" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h11.8c-.5 2.7-2 5-4.4 6.600v5.5h7.1c4.2-3.8 6.6-9.5 6.6-16.1z"/>
+          <path fill="#34A853" d="M24 46c6 0 11-2 14.6-5.4l-7.1-5.5c-2 1.3-4.5 2.1-7.5 2.1-5.8 0-10.7-3.9-12.4-9.1H4.3v5.7C7.9 41 15.4 46 24 46z"/>
+          <path fill="#FBBC05" d="M11.6 28.1c-.4-1.3-.7-2.7-.7-4.1s.3-2.8.7-4.1v-5.7H4.3C2.8 17.1 2 20.4 2 24s.8 6.9 2.3 9.8l7.3-5.7z"/>
+          <path fill="#EA4335" d="M24 10.8c3.3 0 6.2 1.1 8.5 3.3l6.3-6.3C35 4.3 30 2 24 2 15.4 2 7.9 7 4.3 14.2l7.3 5.7c1.7-5.2 6.6-9.1 12.4-9.1z"/>
+        </svg>
+        {{ signingIn ? "ENTRANDO..." : "ENTRAR CON GOOGLE" }}
       </button>
-    </form>
+
+      <p v-if="authError" class="mt-4 text-xs leading-relaxed text-red-400">{{ authError }}</p>
+      <p v-else class="mt-4 text-[0.65rem] leading-relaxed tracking-wider text-white/25">
+        Solo la cuenta autorizada puede administrar el sitio
+      </p>
+    </div>
   </div>
 
   <!-- ─── PANEL ──────────────────────────────────────────────────────────── -->
@@ -270,6 +283,7 @@ async function onDrop(e, toCard) {
         <span class="ml-3 text-xs tracking-widest text-white/40">ADMIN PANEL</span>
       </div>
       <div class="flex items-center gap-3">
+        <span class="hidden text-xs text-white/25 md:inline">{{ userEmail }}</span>
         <span class="text-xs text-white/30">{{ cards.length }} videos</span>
         <button
           @click="showAddForm = !showAddForm"

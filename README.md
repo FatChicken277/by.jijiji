@@ -36,18 +36,29 @@ scripts/        utilidades de mantenimiento de la base
 
 `/admin` permite agregar, editar, reordenar y borrar videos del portfolio.
 
-El acceso usa **Firebase Auth** (email + contraseña). Los usuarios se gestionan
-desde la consola de Firebase → Authentication. No hay registro público.
+El acceso usa **Firebase Auth** con cuenta de Google. No hay registro público ni
+contraseñas propias de la aplicación.
 
-Las reglas de Firestore deben mantener la lectura abierta (el sitio la necesita)
-y la escritura cerrada:
+Quién puede administrar se define en **dos lugares que deben coincidir**:
+
+1. `ALLOWED_EMAILS` en `src/views/Admin.vue` — evita mostrar un panel que no
+   podría guardar nada.
+2. Las reglas de Firestore — esta es la barrera real, porque se puede escribir
+   en la base sin pasar por el panel.
 
 ```
 match /projects/{doc} {
   allow read: if true;
-  allow write: if request.auth != null;
+  allow write: if request.auth != null
+               && request.auth.token.email == "haski.audiovisual@gmail.com";
 }
 ```
+
+Para sumar un administrador hay que agregar su email en ambos lugares.
+
+En la consola de Firebase, el dominio del sitio tiene que estar en
+**Authentication → Settings → Authorized domains**, o el login falla con
+`auth/unauthorized-domain`.
 
 ## Datos
 
