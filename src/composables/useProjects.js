@@ -30,22 +30,26 @@ export function useProjects() {
   async function addProject(project) {
     const all = await getAll();
     const newId = all.length > 0 ? Math.max(...all.map((c) => c.id)) + 1 : 1;
+
+    // El video nuevo queda primero ocupando un hueco por debajo del minimo, sin
+    // tocar ningun otro documento. Es una sola escritura.
+    //
+    // Una version anterior reindexaba los 198 documentos en cada alta para que
+    // "order" quedara contiguo desde 0. Eso hacia depender el resultado de una
+    // lectura previa: si llegaba desfasada desde la cache del SDK, el
+    // reindexado se corria y dejaba posiciones duplicadas. El valor exacto de
+    // "order" no le importa a nadie (solo su orden relativo), asi que no vale
+    // la pena arriesgar 198 escrituras por tenerlo prolijo. reorder() los
+    // normaliza cuando hace falta.
+    const newOrder = all.length > 0 ? Math.min(...all.map((c) => c.order)) - 1 : 0;
     const newCard = {
       ...project,
       id: newId,
       highlight: project.highlight || false,
-      order: 0,
+      order: newOrder,
     };
 
-    // El video nuevo entra primero y el resto corre una posicion. Se reindexa
-    // todo en un batch para que "order" quede siempre contiguo desde 0.
-    const batch = writeBatch(db);
-    batch.set(doc(db, COL, String(newId)), newCard);
-    all.forEach((card, idx) => {
-      batch.update(doc(db, COL, String(card.id)), { order: idx + 1 });
-    });
-    await batch.commit();
-
+    await setDoc(doc(db, COL, String(newId)), newCard);
     return newCard;
   }
 
@@ -57,12 +61,19 @@ export function useProjects() {
     await deleteDoc(doc(db, COL, String(id)));
   }
 
+  // Normaliza "order" a 0..n-1 segun el orden recibido. Es lo que corrige
+  // cualquier hueco, duplicado o valor negativo que haya quedado.
+  // Se trocea porque un writeBatch admite 500 operaciones: con 198 videos aun
+  // entra en un solo lote, pero dejarlo sin trocear lo rompe al crecer.
   async function reorder(cards) {
-    const batch = writeBatch(db);
-    cards.forEach((card, idx) => {
-      batch.update(doc(db, COL, String(card.id)), { order: idx });
-    });
-    await batch.commit();
+    const CHUNK = 400;
+    for (let i = 0; i < cards.length; i += CHUNK) {
+      const batch = writeBatch(db);
+      cards.slice(i, i + CHUNK).forEach((card, j) => {
+        batch.update(doc(db, COL, String(card.id)), { order: i + j });
+      });
+      await batch.commit();
+    }
   }
 
   return { getAll, addProject, updateProject, deleteProject, reorder };
